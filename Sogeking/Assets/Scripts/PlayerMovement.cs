@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
        startSpeed = speed;
-        CursorLockMode locked = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -42,4 +41,5 @@ public class PlayerMovement : MonoBehaviour
         transform.Translate( direction * speed * Time.deltaTime);
 
     }
+
 }

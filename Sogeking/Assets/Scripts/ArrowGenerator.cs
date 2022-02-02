@@ -20,7 +20,7 @@ public class ArrowGenerator : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && canShoot == true)
         {
-            Shoot(player.transform.localRotation.eulerAngles);
+            Shoot(player.transform.rotation.eulerAngles);
             canShoot = false;
         }
         if (!canShoot)

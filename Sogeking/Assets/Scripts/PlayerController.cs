@@ -62,12 +62,19 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-                lmbDownTime = Time.time;
+            lmbDownTime = Time.time;
         }
         if (Input.GetMouseButtonUp(0))
         {
                 timePass = Time.time - lmbDownTime;
+            if (timePass <= 2)
+            {
                 finalArrowSpeed = arrowSpeed * timePass;
+            }
+            if (timePass > 2)
+            {
+                finalArrowSpeed = arrowSpeed * 2;
+            }
                 // arrowGenerator.GetComponent<ArrowGenerator>().arrowIndependence();
                 Shoot(finalArrowSpeed);
                // shootedArrow = true;

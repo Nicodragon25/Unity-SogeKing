@@ -241,7 +241,7 @@ MonoBehaviour:
   loadedArrow: 0
   shootedArrow: 0
   lmbDownTime: 0
-  arrowSpeed: 3
+  arrowSpeed: 5
   finalArrowSpeed: 0
   timePass: 0
 --- !u!1 &668402428

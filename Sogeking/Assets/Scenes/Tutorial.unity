@@ -235,6 +235,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   startSpeed: 0
+  arrowGenerator: {fileID: 1795060394}
+  arrow: {fileID: 0}
+  loadedArrow: 0
+  shootedArrow: 0
+  lmbDownTime: 0
+  arrowSpeed: 3
+  finalArrowSpeed: 0
+  timePass: 0
 --- !u!1 &668402428
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,7 +861,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrowPrefab: {fileID: 2304498117594175997, guid: 0e481522fc76b8b4fbc85c31ef695ea2, type: 3}
   player: {fileID: 963194225}
-  shootingCoolDown: 1
 --- !u!1 &1821180316
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,9 +7,7 @@ public class ArrowGenerator : MonoBehaviour
     public GameObject arrowPrefab;
     public GameObject player;
 
-    bool canShoot = true;
-    public float shootingCoolDown;
-    float timePass;
+    GameObject arrow;
     void Start()
     {
 
@@ -18,24 +16,17 @@ public class ArrowGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && canShoot == true)
-        {
-            Shoot(player.transform.rotation.eulerAngles);
-            canShoot = false;
-        }
-        if (!canShoot)
-        {
-            timePass += Time.deltaTime;
-        }
-        if (timePass >= shootingCoolDown)
-        {
-            canShoot = true;
-            timePass = 0;
-        }
     }
 
-    private void Shoot(Vector3 Rotation)
+    public void arrowSpawn(Vector3 Rotation)
     {
-        Instantiate(arrowPrefab, transform.position, transform.rotation = Quaternion.Euler(Rotation));
+        arrow = Instantiate(arrowPrefab, transform.position, transform.rotation = Quaternion.Euler(Rotation));
+        arrow.transform.parent = transform;
+        
+    }
+
+    public void arrowIndependence()
+    {
+        arrow.transform.parent = null;
     }
 }

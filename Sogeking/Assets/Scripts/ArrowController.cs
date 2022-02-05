@@ -16,16 +16,6 @@ public class ArrowController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /* if (FindObjectOfType<PlayerController>().loadedArrow == true)
-        {
-            gameObject.tag = "LoadedArrow";
-        }
-        if (gameObject.tag == "ShotArrow")
-        {
-            GameObject player = GameObject.Find("Player");
-            float shotSpeed = player.GetComponent<PlayerController>().finalArrowSpeed;
-            ArrowMovement(shotSpeed);
-        } */
         ArrowMovement(speed);
     }
 
@@ -36,6 +26,5 @@ public class ArrowController : MonoBehaviour
     public void loadedArrowDestroy()
     {
         Destroy(gameObject);
-
     }
 }

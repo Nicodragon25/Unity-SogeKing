@@ -40,46 +40,34 @@ public class PlayerController : MonoBehaviour
             speed = startSpeed;
         }
 
-        /* if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1))
         {
-            if (loadedArrow == false)
-            {
-                arrowGenerator.GetComponent<ArrowGenerator>().arrowSpawn(arrowGenerator.GetComponent<ArrowGenerator>().player.transform.rotation.eulerAngles);
-                loadedArrow = true;
-                shootedArrow = false;
-            }
+            arrowGenerator.GetComponent<ArrowGenerator>().arrowSpawn(playerViewPoint.transform.rotation.eulerAngles);
+            loadedArrow = true;
         }
         if (Input.GetMouseButtonUp(1))
         {
-            if (shootedArrow == false)
+            if (loadedArrow)
             {
-                GameObject nonShotArrow = GameObject.FindGameObjectWithTag("LoadedArrow");
-                nonShotArrow.GetComponent<ArrowController>().loadedArrowDestroy();
-                loadedArrow = false;
+                arrowGenerator.GetComponent<ArrowGenerator>().arrow.GetComponent<ArrowController>().loadedArrowDestroy();
             }
-
-        } */
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            lmbDownTime = Time.time;
         }
-        if (Input.GetMouseButtonUp(0))
+
+        if (Input.GetMouseButton(1))
         {
+            if (Input.GetMouseButtonDown(0))
+            {
+                lmbDownTime = Time.time;
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
                 timePass = Time.time - lmbDownTime;
-            if (timePass <= 2)
-            {
-                finalArrowSpeed = arrowSpeed * timePass;
-            }
-            if (timePass > 2)
-            {
-                finalArrowSpeed = arrowSpeed * 2;
-            }
-                // arrowGenerator.GetComponent<ArrowGenerator>().arrowIndependence();
+                if (timePass <= 2) finalArrowSpeed = arrowSpeed * timePass;
+                if (timePass > 2) finalArrowSpeed = arrowSpeed * 2;
+                loadedArrow = false;
                 Shoot(finalArrowSpeed);
-               // shootedArrow = true;
-               // loadedArrow = false;
                 lmbDownTime = 0;
+            }
         }
     }
 
@@ -91,8 +79,6 @@ public class PlayerController : MonoBehaviour
 
     void Shoot(float ShotSpeed)
     {
-        arrowGenerator.GetComponent<ArrowGenerator>().arrowSpawn(playerViewPoint.transform.rotation.eulerAngles, ShotSpeed);
-
-        // arrow.tag = "ShotArrow";
+        arrowGenerator.GetComponent<ArrowGenerator>().arrowShot(ShotSpeed);
     }
 }

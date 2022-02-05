@@ -7,7 +7,7 @@ public class ArrowGenerator : MonoBehaviour
     public GameObject arrowPrefab;
     public GameObject player;
 
-    GameObject arrow;
+    public GameObject arrow;
     void Start()
     {
 
@@ -18,14 +18,16 @@ public class ArrowGenerator : MonoBehaviour
     {
     }
 
-    public void arrowSpawn(Vector3 Rotation, float arrowspeed)
+    public void arrowSpawn(Vector3 Rotation)
     {
         arrow = Instantiate(arrowPrefab, transform.position, transform.rotation = Quaternion.Euler(Rotation));
-        arrow.GetComponent<ArrowController>().speed = arrowspeed;
+        arrow.GetComponent<ArrowController>().speed = 0;
+        arrow.transform.parent = transform;
     }
 
-    public void arrowIndependence()
+    public void arrowShot(float arrowspeed)
     {
         arrow.transform.parent = null;
+        arrow.GetComponent<ArrowController>().speed = arrowspeed;
     }
 }

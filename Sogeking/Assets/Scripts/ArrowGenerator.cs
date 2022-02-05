@@ -29,5 +29,6 @@ public class ArrowGenerator : MonoBehaviour
     {
         arrow.transform.parent = null;
         arrow.GetComponent<ArrowController>().speed = arrowspeed;
+        
     }
 }

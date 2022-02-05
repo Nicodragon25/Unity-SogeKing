@@ -11,12 +11,15 @@ public class PlayerController : MonoBehaviour
     public GameObject playerViewPoint;
 
     public bool loadedArrow = false;
-    public bool shootedArrow = false;
 
     public float lmbDownTime;
     public float arrowSpeed;
     public float finalArrowSpeed;
-    public float timePass;
+    public float shotTimePass;
+
+    float timePass;
+    public float arrowSCD;
+    bool canArrowSpawn;
     void Start()
     {
        startSpeed = speed;
@@ -44,6 +47,7 @@ public class PlayerController : MonoBehaviour
         {
             arrowGenerator.GetComponent<ArrowGenerator>().arrowSpawn(playerViewPoint.transform.rotation.eulerAngles);
             loadedArrow = true;
+            canArrowSpawn = false;
         }
         if (Input.GetMouseButtonUp(1))
         {
@@ -55,17 +59,33 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButton(1))
         {
+            if (!loadedArrow && canArrowSpawn)
+            {
+                arrowGenerator.GetComponent<ArrowGenerator>().arrowSpawn(playerViewPoint.transform.rotation.eulerAngles);
+                loadedArrow = true;
+                canArrowSpawn = false;
+            }
+
+            if (!canArrowSpawn)
+            {
+                timePass += Time.deltaTime;
+            }
+            if (timePass >= arrowSCD)
+            {
+                canArrowSpawn = true;
+                timePass = 0;
+            }
             if (Input.GetMouseButtonDown(0))
             {
                 lmbDownTime = Time.time;
             }
             if (Input.GetMouseButtonUp(0))
             {
-                timePass = Time.time - lmbDownTime;
-                if (timePass <= 2) finalArrowSpeed = arrowSpeed * timePass;
-                if (timePass > 2) finalArrowSpeed = arrowSpeed * 2;
-                loadedArrow = false;
+                shotTimePass = Time.time - lmbDownTime;
+                if (shotTimePass <= 2) finalArrowSpeed = arrowSpeed * shotTimePass;
+                if (shotTimePass > 2) finalArrowSpeed = arrowSpeed * 2;
                 Shoot(finalArrowSpeed);
+                loadedArrow = false;
                 lmbDownTime = 0;
             }
         }

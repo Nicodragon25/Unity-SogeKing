@@ -17,6 +17,10 @@ public class ArrowController : MonoBehaviour
     void Update()
     {
         ArrowMovement(speed);
+        if (speed != 0)
+        {
+            Destroy(gameObject, destroyTime);
+        }
     }
 
     public void ArrowMovement(float arrowSpeed)

@@ -18,11 +18,10 @@ public class ArrowGenerator : MonoBehaviour
     {
     }
 
-    public void arrowSpawn(Vector3 Rotation)
+    public void arrowSpawn(Vector3 Rotation, float arrowspeed)
     {
         arrow = Instantiate(arrowPrefab, transform.position, transform.rotation = Quaternion.Euler(Rotation));
-        arrow.transform.parent = transform;
-        
+        arrow.GetComponent<ArrowController>().speed = arrowspeed;
     }
 
     public void arrowIndependence()

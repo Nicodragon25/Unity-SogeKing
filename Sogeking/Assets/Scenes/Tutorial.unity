@@ -237,6 +237,7 @@ MonoBehaviour:
   startSpeed: 0
   arrowGenerator: {fileID: 1795060394}
   arrow: {fileID: 0}
+  playerViewPoint: {fileID: 963194225}
   loadedArrow: 0
   shootedArrow: 0
   lmbDownTime: 0

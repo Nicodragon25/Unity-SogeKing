@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     float timePass;
     public float arrowSCD;
     bool canArrowSpawn;
+
+
     void Start()
     {
        startSpeed = speed;
@@ -66,7 +68,7 @@ public class PlayerController : MonoBehaviour
                 canArrowSpawn = false;
             }
 
-            if (!canArrowSpawn)
+            if (!canArrowSpawn && loadedArrow == false)
             {
                 timePass += Time.deltaTime;
             }
@@ -94,11 +96,15 @@ public class PlayerController : MonoBehaviour
     void Move(Vector3 direction)
     {
         transform.Translate( direction * speed * Time.deltaTime);
-
     }
 
     void Shoot(float ShotSpeed)
     {
         arrowGenerator.GetComponent<ArrowGenerator>().arrowShot(ShotSpeed);
+    }
+
+    public void ArrowSwitch()
+    {
+       
     }
 }

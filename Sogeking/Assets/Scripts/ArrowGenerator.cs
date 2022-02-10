@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class ArrowGenerator : MonoBehaviour
 {
-    public GameObject arrowPrefab;
+    public GameObject[] arrowPrefabs;
     public GameObject player;
-
     public GameObject arrow;
+
+    enum ArrowTypes { Normal, Fire, Explosive, Ice }
+    [SerializeField] ArrowTypes arrowTypes;
     void Start()
     {
 
@@ -20,9 +22,24 @@ public class ArrowGenerator : MonoBehaviour
 
     public void arrowSpawn(Vector3 Rotation)
     {
-        arrow = Instantiate(arrowPrefab, transform.position, transform.rotation = Quaternion.Euler(Rotation));
-        arrow.GetComponent<ArrowController>().speed = 0;
-        arrow.transform.parent = transform;
+        switch (arrowTypes)
+        {
+            case ArrowTypes.Normal:
+                 arrow = Instantiate(arrowPrefabs[0], transform.position, transform.rotation = Quaternion.Euler(Rotation));
+                 arrow.GetComponent<ArrowController>().speed = 0;
+                 arrow.transform.parent = transform;
+            break;
+            case ArrowTypes.Fire:
+                arrow = Instantiate(arrowPrefabs[1], transform.position, transform.rotation = Quaternion.Euler(Rotation));
+                arrow.GetComponent<ArrowController>().speed = 0;
+                arrow.transform.parent = transform;
+            break;
+            case ArrowTypes.Explosive:
+                arrow = Instantiate(arrowPrefabs[2], transform.position, transform.rotation = Quaternion.Euler(Rotation));
+                arrow.GetComponent<ArrowController>().speed = 0;
+                arrow.transform.parent = transform;
+            break;
+        }
     }
 
     public void arrowShot(float arrowspeed)

@@ -102,10 +102,28 @@ public class PlayerController : MonoBehaviour
     {
         arrowGenerator.GetComponent<ArrowGenerator>().arrowShot(ShotSpeed);
     }
-
-    public void ArrowSwitch()
+    void ArrowSwitch(string arrowType)
     {
-       
+        switch (arrowType)
+        {
+            case "NormalArrow":
+                arrowGenerator.GetComponent<ArrowGenerator>().arrowTypes = ArrowGenerator.ArrowTypes.Normal;
+                break;
+            case "FireArrow":
+                arrowGenerator.GetComponent<ArrowGenerator>().arrowTypes = ArrowGenerator.ArrowTypes.Fire;
+                break;
+        }
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        switch (other.gameObject.tag)
+        {
+            case "Normal":
+                ArrowSwitch("NormalArrow");
+                break;
+            case "Fire":
+                ArrowSwitch("FireArrow");
+            break;
+        }
+    }
 }

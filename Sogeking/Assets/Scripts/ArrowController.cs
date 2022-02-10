@@ -31,4 +31,22 @@ public class ArrowController : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        switch (this.gameObject.tag)
+        {
+            case "Normal":
+                break;
+            case "Fire":
+                if (other.gameObject.CompareTag("WoodenWall"))
+                {
+                    Destroy(other.gameObject, 1f);
+                }
+                break;
+
+                
+        }
+        
+    }
 }

@@ -8,8 +8,8 @@ public class ArrowGenerator : MonoBehaviour
     public GameObject player;
     public GameObject arrow;
 
-    enum ArrowTypes { Normal, Fire, Explosive, Ice }
-    [SerializeField] ArrowTypes arrowTypes;
+    public enum ArrowTypes { Normal, Fire, Explosive, Ice }
+    public ArrowTypes arrowTypes;
     void Start()
     {
 

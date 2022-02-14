@@ -6,6 +6,7 @@ public class ArrowController : MonoBehaviour
 {
     public float speed;
     public float destroyTime;
+    public Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
@@ -34,17 +35,19 @@ public class ArrowController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+
         switch (this.gameObject.tag)
         {
             case "Normal":
+                speed = 0;
                 break;
             case "Fire":
+                speed = 0;
                 if (other.gameObject.CompareTag("WoodenWall"))
                 {
                     Destroy(other.gameObject, 1f);
                 }
                 break;
-
                 
         }
         

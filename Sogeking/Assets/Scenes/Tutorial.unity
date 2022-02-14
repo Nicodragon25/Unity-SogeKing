@@ -880,6 +880,7 @@ MonoBehaviour:
   arrowPrefabs:
   - {fileID: 2304498117594175997, guid: 0e481522fc76b8b4fbc85c31ef695ea2, type: 3}
   - {fileID: 4195505203478836106, guid: c921837471eb7ed47a2abeaec72e6765, type: 3}
+  - {fileID: 2304498117594175997, guid: b9c2ac0675087564d9b32293fc47bb0c, type: 3}
   player: {fileID: 963194225}
   arrow: {fileID: 0}
   arrowTypes: 0

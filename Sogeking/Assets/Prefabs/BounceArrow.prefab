@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 3063138364890513335}
   - component: {fileID: 3288622243920001268}
   m_Layer: 31
-  m_Name: Arrow
-  m_TagString: Normal
+  m_Name: BounceArrow
+  m_TagString: Bounce
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7407721dea641754cb4358df1f481e0c, type: 2}
+  - {fileID: 2100000, guid: 80f309fc831abbc46bb3c80bac020f53, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

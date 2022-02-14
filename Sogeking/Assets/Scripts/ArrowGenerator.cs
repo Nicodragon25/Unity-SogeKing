@@ -8,7 +8,7 @@ public class ArrowGenerator : MonoBehaviour
     public GameObject player;
     public GameObject arrow;
 
-    public enum ArrowTypes { Normal, Fire, Explosive, Ice }
+    public enum ArrowTypes { Normal, Fire, Explosive, Ice}
     public ArrowTypes arrowTypes;
     void Start()
     {
@@ -35,10 +35,11 @@ public class ArrowGenerator : MonoBehaviour
                 arrow.transform.parent = transform;
             break;
             case ArrowTypes.Explosive:
-                arrow = Instantiate(arrowPrefabs[2], transform.position, transform.rotation = Quaternion.Euler(Rotation));
+                arrow = Instantiate(arrowPrefabs[3], transform.position, transform.rotation = Quaternion.Euler(Rotation));
                 arrow.GetComponent<ArrowController>().speed = 0;
                 arrow.transform.parent = transform;
             break;
+
         }
     }
 

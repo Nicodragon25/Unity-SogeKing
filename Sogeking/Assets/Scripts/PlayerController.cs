@@ -112,6 +112,7 @@ public class PlayerController : MonoBehaviour
             case "FireArrow":
                 arrowGenerator.GetComponent<ArrowGenerator>().arrowTypes = ArrowGenerator.ArrowTypes.Fire;
                 break;
+
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -124,6 +125,7 @@ public class PlayerController : MonoBehaviour
             case "Fire":
                 ArrowSwitch("FireArrow");
             break;
+
         }
     }
 }

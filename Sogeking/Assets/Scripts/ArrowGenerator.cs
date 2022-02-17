@@ -25,7 +25,7 @@ public class ArrowGenerator : MonoBehaviour
         switch (arrowTypes)
         {
             case ArrowTypes.Normal:
-                 arrow = Instantiate(arrowPrefabs[0], transform.position, transform.rotation = Quaternion.Euler(Rotation));
+                arrow = Instantiate(arrowPrefabs[0], transform.position, transform.rotation = Quaternion.Euler(Rotation));
                  arrow.GetComponent<ArrowController>().speed = 0;
                  arrow.transform.parent = transform;
             break;
@@ -47,6 +47,7 @@ public class ArrowGenerator : MonoBehaviour
     {
         arrow.transform.parent = null;
         arrow.GetComponent<ArrowController>().speed = arrowspeed;
-        
+        arrow.GetComponent<ArrowController>().rb.isKinematic = false;
+        arrow.GetComponent<ArrowController>().canMove = true;
     }
 }

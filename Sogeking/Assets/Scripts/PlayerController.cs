@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public GameObject arrow;
     public GameObject playerViewPoint;
 
+
     public bool loadedArrow = false;
 
     public float lmbDownTime;
@@ -96,6 +97,7 @@ public class PlayerController : MonoBehaviour
     void Move(Vector3 direction)
     {
         transform.Translate( direction * speed * Time.deltaTime);
+
     }
 
     void Shoot(float ShotSpeed)

@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8185560874092385729}
   - component: {fileID: 7049644656042654325}
   - component: {fileID: 8639644701612742218}
-  - component: {fileID: 3063138364890513335}
   - component: {fileID: 3288622243920001268}
+  - component: {fileID: 631701740078824704}
   m_Layer: 31
   m_Name: Arrow
   m_TagString: Normal
@@ -100,19 +100,6 @@ MonoBehaviour:
   speed: 0
   destroyTime: 10
   rb: {fileID: 3288622243920001268}
---- !u!135 &3063138364890513335
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2304498117594175997}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.12
-  m_Center: {x: 0, y: 0, z: 0.45}
 --- !u!54 &3288622243920001268
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -122,13 +109,27 @@ Rigidbody:
   m_GameObject: {fileID: 2304498117594175997}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 5
+  m_AngularDrag: 3.2
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 4
-  m_CollisionDetection: 1
+  m_Constraints: 0
+  m_CollisionDetection: 3
+--- !u!136 &631701740078824704
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2304498117594175997}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.35
+  m_Height: 0.9955609
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.010615706}
 --- !u!1 &2756517588930287667
 GameObject:
   m_ObjectHideFlags: 0

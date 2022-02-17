@@ -241,7 +241,7 @@ MonoBehaviour:
   playerViewPoint: {fileID: 963194225}
   loadedArrow: 0
   lmbDownTime: 0
-  arrowSpeed: 5
+  arrowSpeed: 50
   finalArrowSpeed: 0
   shotTimePass: 0
   arrowSCD: 2

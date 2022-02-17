@@ -18,9 +18,11 @@ public class PlayerController : MonoBehaviour
     public float finalArrowSpeed;
     public float shotTimePass;
 
-    float timePass;
+    float timePassSpawn;
+    float timePassShoot;
     public float arrowSCD;
     bool canArrowSpawn;
+    public bool canArrowShoot;
 
 
     void Start()
@@ -71,27 +73,35 @@ public class PlayerController : MonoBehaviour
 
             if (!canArrowSpawn && loadedArrow == false)
             {
-                timePass += Time.deltaTime;
+                timePassSpawn += Time.deltaTime;
             }
-            if (timePass >= arrowSCD)
+            if (timePassSpawn >= arrowSCD)
             {
                 canArrowSpawn = true;
-                timePass = 0;
+                timePassSpawn = 0;
             }
             if (Input.GetMouseButtonDown(0))
             {
                 lmbDownTime = Time.time;
             }
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0) && canArrowShoot)
             {
                 shotTimePass = Time.time - lmbDownTime;
                 if (shotTimePass <= 2) finalArrowSpeed = arrowSpeed * shotTimePass;
                 if (shotTimePass > 2) finalArrowSpeed = arrowSpeed * 2;
                 Shoot(finalArrowSpeed);
                 loadedArrow = false;
+                canArrowShoot = false;
                 lmbDownTime = 0;
             }
+            if (!canArrowShoot) timePassShoot += Time.deltaTime;
+            if (timePassShoot >= arrowSCD) 
+            { 
+                canArrowShoot = true;
+                timePassShoot = 0;
+            }
         }
+
     }
 
     void Move(Vector3 direction)

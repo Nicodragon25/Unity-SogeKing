@@ -8,7 +8,10 @@ public class ArrowController : MonoBehaviour
     public float destroyTime;
     public Rigidbody rb;
     public bool canMove = false;
+    public Quaternion crashRotation;
+    public float torque;
 
+    bool isStopped;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,13 +24,27 @@ public class ArrowController : MonoBehaviour
         {
             ArrowMovement(speed);
             canMove = false;
+            isStopped = false;
         }
         if (rb.velocity != Vector3.zero)
         {
             Destroy(gameObject, destroyTime);
-            canMove = false;
+            // transform.rotation = Quaternion.LookRotation();
         }
+        if(!isStopped) transform.LookAt(transform.position + rb.velocity);
+        if (isStopped) 
+        { 
+            transform.rotation = crashRotation; 
+            rb.Sleep();
+        }
+
         //if (rb.velocity == Vector3.zero && !alreadyshot) hasForce = false;
+        /*if (transform.rotation.x <= initialRotation.x)
+        {
+            //rb.angularVelocity += transform.TransformDirection(Vector3.right * rb.velocity.z * Time.deltaTime);
+            rb.AddRelativeTorque(Vector3.left * torque * Time.deltaTime);
+            Debug.Log("rotar");
+        }*/
     }
     public void ArrowMovement(float arrowSpeed)
     {
@@ -45,14 +62,17 @@ public class ArrowController : MonoBehaviour
         switch (this.gameObject.tag)
         {
             case "Normal":
-                //speed = 0;
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
+                crashRotation = transform.rotation;
+                isStopped = true;
                 break;
             case "Fire":
                 //speed = 0;
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
+                crashRotation = transform.rotation;
+                isStopped = true;
                 if (other.gameObject.CompareTag("WoodenWall"))
                 {
                     Destroy(other.gameObject, 1f);

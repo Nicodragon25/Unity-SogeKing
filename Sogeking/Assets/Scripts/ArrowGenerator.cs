@@ -26,19 +26,22 @@ public class ArrowGenerator : MonoBehaviour
         {
             case ArrowTypes.Normal:
                 arrow = Instantiate(arrowPrefabs[0], transform.position, transform.rotation = Quaternion.Euler(Rotation));
-                 arrow.GetComponent<ArrowController>().speed = 0;
-                 arrow.transform.parent = transform;
+                arrow.GetComponent<ArrowController>().speed = 0;
+                arrow.GetComponent<ArrowController>().rb.isKinematic = true;
+                arrow.transform.parent = transform;
             break;
             case ArrowTypes.Fire:
                 arrow = Instantiate(arrowPrefabs[1], transform.position, transform.rotation = Quaternion.Euler(Rotation));
                 arrow.GetComponent<ArrowController>().speed = 0;
+                arrow.GetComponent<ArrowController>().rb.isKinematic = true;
                 arrow.transform.parent = transform;
             break;
             case ArrowTypes.Explosive:
                 arrow = Instantiate(arrowPrefabs[3], transform.position, transform.rotation = Quaternion.Euler(Rotation));
                 arrow.GetComponent<ArrowController>().speed = 0;
+                arrow.GetComponent<ArrowController>().rb.isKinematic = true;
                 arrow.transform.parent = transform;
-            break;
+                break;
 
         }
     }

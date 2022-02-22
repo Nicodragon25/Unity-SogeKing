@@ -5,12 +5,13 @@ using UnityEngine;
 public class ArrowController : MonoBehaviour
 {
     public float speed;
+    public float ArrowDmg;
     public float destroyTime;
     public Rigidbody rb;
     public bool canMove = false;
     public Quaternion crashRotation;
     public float torque;
-
+    public float gravity = 15;
     bool isStopped;
     // Start is called before the first frame update
     void Start()
@@ -18,7 +19,7 @@ public class ArrowController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(canMove)
         {
@@ -37,7 +38,6 @@ public class ArrowController : MonoBehaviour
             transform.rotation = crashRotation; 
             rb.Sleep();
         }
-
         //if (rb.velocity == Vector3.zero && !alreadyshot) hasForce = false;
         /*if (transform.rotation.x <= initialRotation.x)
         {
@@ -58,7 +58,7 @@ public class ArrowController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-
+        Debug.Log(other.gameObject.name);
         switch (this.gameObject.tag)
         {
             case "Normal":
@@ -66,6 +66,7 @@ public class ArrowController : MonoBehaviour
                 rb.angularVelocity = Vector3.zero;
                 crashRotation = transform.rotation;
                 isStopped = true;
+
                 break;
             case "Fire":
                 //speed = 0;
@@ -80,6 +81,10 @@ public class ArrowController : MonoBehaviour
                 break;
                 
         }
-        
+        if (other.transform.CompareTag("Enemy"))
+        {
+            GameObject enemyCollider = other.gameObject;
+            enemyCollider.GetComponentInParent<DummyController>().TakeDamage(ArrowDmg);
+        }
     }
 }

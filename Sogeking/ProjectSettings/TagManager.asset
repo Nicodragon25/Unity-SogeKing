@@ -8,6 +8,8 @@ TagManager:
   - Normal
   - WoodenWall
   - Bouncy
+  - Bounce
+  - Enemy
   layers:
   - Default
   - TransparentFX

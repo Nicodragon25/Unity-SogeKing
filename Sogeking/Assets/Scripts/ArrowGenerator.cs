@@ -8,6 +8,9 @@ public class ArrowGenerator : MonoBehaviour
     public GameObject player;
     public GameObject arrow;
 
+    public float normalDmg;
+    public float fireDmg;
+    public float explosiveDmg;
     public enum ArrowTypes { Normal, Fire, Explosive, Ice}
     public ArrowTypes arrowTypes;
     void Start()
@@ -27,18 +30,21 @@ public class ArrowGenerator : MonoBehaviour
             case ArrowTypes.Normal:
                 arrow = Instantiate(arrowPrefabs[0], transform.position, transform.rotation = Quaternion.Euler(Rotation));
                 arrow.GetComponent<ArrowController>().speed = 0;
+                arrow.GetComponent<ArrowController>().ArrowDmg = normalDmg;
                 arrow.GetComponent<ArrowController>().rb.isKinematic = true;
                 arrow.transform.parent = transform;
             break;
             case ArrowTypes.Fire:
                 arrow = Instantiate(arrowPrefabs[1], transform.position, transform.rotation = Quaternion.Euler(Rotation));
                 arrow.GetComponent<ArrowController>().speed = 0;
+                arrow.GetComponent<ArrowController>().ArrowDmg = fireDmg;
                 arrow.GetComponent<ArrowController>().rb.isKinematic = true;
                 arrow.transform.parent = transform;
             break;
             case ArrowTypes.Explosive:
                 arrow = Instantiate(arrowPrefabs[3], transform.position, transform.rotation = Quaternion.Euler(Rotation));
                 arrow.GetComponent<ArrowController>().speed = 0;
+                arrow.GetComponent<ArrowController>().ArrowDmg = explosiveDmg;
                 arrow.GetComponent<ArrowController>().rb.isKinematic = true;
                 arrow.transform.parent = transform;
                 break;

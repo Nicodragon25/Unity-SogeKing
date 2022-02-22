@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6078347848950595510}
   - component: {fileID: 4906402835422138370}
   - component: {fileID: 5918989951485082685}
-  - component: {fileID: 1946987456123859253}
   - component: {fileID: 3345025453310139411}
+  - component: {fileID: -7037101409257161165}
   m_Layer: 31
   m_Name: FireArrow
   m_TagString: Fire
@@ -98,24 +98,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
+  ArrowDmg: 0
   destroyTime: 10
   rb: {fileID: 3345025453310139411}
   canMove: 0
   crashRotation: {x: 0, y: 0, z: 0, w: 0}
   torque: 0
---- !u!135 &1946987456123859253
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4195505203478836106}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.12
-  m_Center: {x: 0, y: 0, z: 0.45}
 --- !u!54 &3345025453310139411
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -132,6 +120,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!136 &-7037101409257161165
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4195505203478836106}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.35
+  m_Height: 0.9955609
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.010615706}
 --- !u!1 &8360686184145528343
 GameObject:
   m_ObjectHideFlags: 0

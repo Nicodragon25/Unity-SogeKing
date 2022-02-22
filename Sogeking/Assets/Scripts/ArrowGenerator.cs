@@ -11,14 +11,14 @@ public class ArrowGenerator : MonoBehaviour
     public float normalDmg;
     public float fireDmg;
     public float explosiveDmg;
-    public enum ArrowTypes { Normal, Fire, Explosive, Ice}
+    public enum ArrowTypes { Normal, Fire, Explosive, Ice }
     public ArrowTypes arrowTypes;
+
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
     }
@@ -58,5 +58,6 @@ public class ArrowGenerator : MonoBehaviour
         arrow.GetComponent<ArrowController>().speed = arrowspeed;
         arrow.GetComponent<ArrowController>().rb.isKinematic = false;
         arrow.GetComponent<ArrowController>().canMove = true;
+        arrow.GetComponent<TrailRenderer>().enabled = true;
     }
 }

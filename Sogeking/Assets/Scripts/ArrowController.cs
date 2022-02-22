@@ -5,6 +5,7 @@ using UnityEngine;
 public class ArrowController : MonoBehaviour
 {
     public float speed;
+    public float arrowSpeed;
     public float ArrowDmg;
     public float destroyTime;
     public Rigidbody rb;
@@ -13,12 +14,13 @@ public class ArrowController : MonoBehaviour
     public float torque;
     public float gravity = 15;
     bool isStopped;
-    // Start is called before the first frame update
+
+    public bool hasTrail;
     void Start()
     {
+        gameObject.GetComponent<TrailRenderer>().enabled = false;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if(canMove)
@@ -38,13 +40,6 @@ public class ArrowController : MonoBehaviour
             transform.rotation = crashRotation; 
             rb.Sleep();
         }
-        //if (rb.velocity == Vector3.zero && !alreadyshot) hasForce = false;
-        /*if (transform.rotation.x <= initialRotation.x)
-        {
-            //rb.angularVelocity += transform.TransformDirection(Vector3.right * rb.velocity.z * Time.deltaTime);
-            rb.AddRelativeTorque(Vector3.left * torque * Time.deltaTime);
-            Debug.Log("rotar");
-        }*/
     }
     public void ArrowMovement(float arrowSpeed)
     {

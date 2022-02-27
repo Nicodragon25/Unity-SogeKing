@@ -6,19 +6,22 @@ public class ArrowController : MonoBehaviour
 {
     public float speed;
     public float arrowSpeed;
-    public float ArrowDmg;
     public float destroyTime;
     public Rigidbody rb;
     public bool canMove = false;
     public Quaternion crashRotation;
     public float torque;
-    public float gravity = 15;
     bool isStopped;
+
+    public float arrowDmg;
+    public float arrowHsDmg;
 
     public bool hasTrail;
     void Start()
     {
         gameObject.GetComponent<TrailRenderer>().enabled = false;
+
+        
     }
 
     void FixedUpdate()
@@ -32,6 +35,7 @@ public class ArrowController : MonoBehaviour
         if (rb.velocity != Vector3.zero)
         {
             Destroy(gameObject, destroyTime);
+            arrowHsDmg = arrowDmg * 1.5f;
             // transform.rotation = Quaternion.LookRotation();
         }
         if(!isStopped) transform.LookAt(transform.position + rb.velocity);
@@ -50,10 +54,10 @@ public class ArrowController : MonoBehaviour
     {
         Destroy(gameObject);
     }
-
+    
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log(other.gameObject.name);
+        //Debug.Log(other.gameObject.name);
         switch (this.gameObject.tag)
         {
             case "Normal":
@@ -75,11 +79,6 @@ public class ArrowController : MonoBehaviour
                 }
                 break;
                 
-        }
-        if (other.transform.CompareTag("Enemy"))
-        {
-            GameObject enemyCollider = other.gameObject;
-            enemyCollider.GetComponentInParent<DummyController>().TakeDamage(ArrowDmg);
         }
     }
 }

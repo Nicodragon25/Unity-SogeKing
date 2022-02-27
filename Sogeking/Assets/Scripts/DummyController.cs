@@ -6,7 +6,7 @@ public class DummyController : MonoBehaviour
 {
     public float Hp;
     public Animator animator;
-
+    public GameObject damageText;
     void Start()
     {
         animator.SetBool("isAlive", true);
@@ -15,16 +15,42 @@ public class DummyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
     }
     public void TakeDamage(float dmg)
     {
         Hp -= dmg;
-        if (Hp > 0)animator.Play("pushed");
+        if (Hp > 0) animator.Play("pushed");
         if (Hp <= 0)
         {
             animator.Play("died");
             GetComponentInChildren<MeshCollider>().enabled = false;
+        }
+
+        Vector3 spawnPos = new Vector3(0f, 1f, 0f);
+        DamageIndicator indicator = Instantiate(damageText, spawnPos, Quaternion.identity).GetComponent<DamageIndicator>();
+        indicator.SetDamageNumber(dmg);
+        indicator.transform.SetParent(gameObject.transform, false);
+    }
+
+
+
+    public void OnChildrenCollision(string name, Collision other)
+    {
+        switch (name)
+        {
+            case "Body":
+                if (other.gameObject.layer == 31)
+                {
+                    TakeDamage(other.gameObject.GetComponent<ArrowController>().arrowDmg);
+                }
+                break;
+            case "Head":
+                if (other.gameObject.layer == 31)
+                {
+                    TakeDamage(other.gameObject.GetComponent<ArrowController>().arrowHsDmg);
+                }
+                break;
         }
     }
 }

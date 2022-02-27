@@ -107,9 +107,7 @@ MonoBehaviour:
   crashRotation: {x: 0, y: 0, z: 0, w: 0}
   torque: 0
   gravity: 0
-  minSpeed: 0
   hasTrail: 0
-  isAutoShooted: 0
 --- !u!54 &3288622243920001268
 Rigidbody:
   m_ObjectHideFlags: 0

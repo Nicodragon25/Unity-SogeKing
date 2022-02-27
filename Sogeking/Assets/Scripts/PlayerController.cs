@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
     bool canArrowSpawn;
     public bool canArrowShoot;
 
-
     void Start()
     {
        startSpeed = speed;
@@ -93,6 +92,8 @@ public class PlayerController : MonoBehaviour
                 loadedArrow = false;
                 canArrowShoot = false;
                 lmbDownTime = 0;
+
+               
             }
             if (!canArrowShoot) timePassShoot += Time.deltaTime;
             if (timePassShoot >= arrowSCD) 
@@ -112,7 +113,7 @@ public class PlayerController : MonoBehaviour
 
     void Shoot(float ShotSpeed)
     {
-        arrowGenerator.GetComponent<ArrowGenerator>().arrowShot(ShotSpeed);
+        arrowGenerator.GetComponent<ArrowGenerator>().arrowShot(ShotSpeed, Mathf.Ceil(finalArrowSpeed / 4));
     }
     void ArrowSwitch(string arrowType)
     {

@@ -16,7 +16,6 @@ public class ArrowGenerator : MonoBehaviour
 
     void Start()
     {
-
     }
 
     void Update()
@@ -30,21 +29,20 @@ public class ArrowGenerator : MonoBehaviour
             case ArrowTypes.Normal:
                 arrow = Instantiate(arrowPrefabs[0], transform.position, transform.rotation = Quaternion.Euler(Rotation));
                 arrow.GetComponent<ArrowController>().speed = 0;
-                arrow.GetComponent<ArrowController>().ArrowDmg = normalDmg;
                 arrow.GetComponent<ArrowController>().rb.isKinematic = true;
                 arrow.transform.parent = transform;
-            break;
+                break;
             case ArrowTypes.Fire:
                 arrow = Instantiate(arrowPrefabs[1], transform.position, transform.rotation = Quaternion.Euler(Rotation));
                 arrow.GetComponent<ArrowController>().speed = 0;
-                arrow.GetComponent<ArrowController>().ArrowDmg = fireDmg;
+                arrow.GetComponent<ArrowController>().arrowDmg = fireDmg;
                 arrow.GetComponent<ArrowController>().rb.isKinematic = true;
                 arrow.transform.parent = transform;
-            break;
+                break;
             case ArrowTypes.Explosive:
                 arrow = Instantiate(arrowPrefabs[3], transform.position, transform.rotation = Quaternion.Euler(Rotation));
                 arrow.GetComponent<ArrowController>().speed = 0;
-                arrow.GetComponent<ArrowController>().ArrowDmg = explosiveDmg;
+                arrow.GetComponent<ArrowController>().arrowDmg = explosiveDmg;
                 arrow.GetComponent<ArrowController>().rb.isKinematic = true;
                 arrow.transform.parent = transform;
                 break;
@@ -52,12 +50,19 @@ public class ArrowGenerator : MonoBehaviour
         }
     }
 
-    public void arrowShot(float arrowspeed)
+    public void arrowShot(float arrowspeed, float finalArrowDmg)
     {
         arrow.transform.parent = null;
         arrow.GetComponent<ArrowController>().speed = arrowspeed;
         arrow.GetComponent<ArrowController>().rb.isKinematic = false;
         arrow.GetComponent<ArrowController>().canMove = true;
         arrow.GetComponent<TrailRenderer>().enabled = true;
+        switch (arrowTypes)
+        {
+            case ArrowTypes.Normal:
+                normalDmg = finalArrowDmg;
+                arrow.GetComponent<ArrowController>().arrowDmg = normalDmg;
+                break;
+        }
     }
 }

@@ -10,6 +10,7 @@ TagManager:
   - Bouncy
   - Bounce
   - Enemy
+  - Door
   layers:
   - Default
   - TransparentFX

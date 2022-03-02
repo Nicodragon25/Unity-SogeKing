@@ -832,6 +832,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208307217}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1348369284 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8068073526183931155, guid: 90b2ec07807805c45809e9c77d382f38, type: 3}
+  m_PrefabInstance: {fileID: 1798682420}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1348369286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348369284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d0b88d6d9c7c74d9dd7ff439263bcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorHP: 50
 --- !u!1 &1795060394
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,6 +953,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 90b2ec07807805c45809e9c77d382f38, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8068073526183931155, guid: 90b2ec07807805c45809e9c77d382f38, type: 3}
+      propertyPath: m_TagString
+      value: Door
       objectReference: {fileID: 0}
     - target: {fileID: -6870835674241742580, guid: 90b2ec07807805c45809e9c77d382f38, type: 3}
       propertyPath: m_Materials.Array.data[0]

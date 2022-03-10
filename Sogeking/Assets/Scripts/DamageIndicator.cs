@@ -11,7 +11,7 @@ public class DamageIndicator : MonoBehaviour
     public float minDistance;
     public float maxDistance;
 
-    private Vector3 initialPosition;
+    [SerializeField]private Vector3 initialPosition;
     [SerializeField] private Vector3 targetPosition;
     private float timePass;
 
@@ -37,7 +37,7 @@ public class DamageIndicator : MonoBehaviour
 
         if (timePass >= lifeTime) Destroy(gameObject);
         else if (timePass > (fraction * 3)) text.color = Color.Lerp(text.color, Color.clear, (timePass - fraction) / (lifeTime - fraction) * Time.deltaTime);
-        transform.localPosition = Vector3.Lerp(initialPosition, targetPosition, Mathf.Sin(timePass / lifeTime));
+        transform.position = Vector3.Lerp(initialPosition, targetPosition, Mathf.Sin(timePass / lifeTime));
         transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, Mathf.Sin(timePass / lifeTime));
     }
     public void SetDamageNumber(float damage)

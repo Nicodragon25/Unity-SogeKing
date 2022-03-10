@@ -28,9 +28,9 @@ public class DummyController : MonoBehaviour
         }
 
         Vector3 spawnPos = new Vector3(0f, 1f, 0f);
-        DamageIndicator indicator = Instantiate(damageText, spawnPos, Quaternion.identity).GetComponent<DamageIndicator>();
-        indicator.SetDamageNumber(dmg);
-        indicator.transform.SetParent(gameObject.transform, false);
+        DamageIndicator dummyIndicator = Instantiate(damageText, spawnPos, Quaternion.identity).GetComponent<DamageIndicator>();
+        dummyIndicator.SetDamageNumber(dmg);
+        dummyIndicator.transform.SetParent(gameObject.transform, false);
     }
 
 

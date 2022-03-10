@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -701790989144360201}
   - component: {fileID: 9209949999897311301}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Strong Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: da4461e5627b5154895e48cc8e93715c, type: 2}
+  - {fileID: 2100000, guid: d657c27e12545df4183feac28624615f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -131,8 +131,8 @@ MonoBehaviour:
   damageText: {fileID: 5940899639480595215, guid: 8c9e8e4d9cd9c234abb754cccc12171f, type: 3}
   rb: {fileID: -701790989144360201}
   speed: 5
-  enemyDamage: 10
-  enemyHp: 50
+  enemyDamage: 20
+  enemyHp: 75
   fortLayer:
     serializedVersion: 2
     m_Bits: 134217728

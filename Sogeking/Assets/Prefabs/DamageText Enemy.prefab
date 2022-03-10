@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3818487639977107066}
   - component: {fileID: 5127281361951183049}
   m_Layer: 5
-  m_Name: DamageTextCanvas
+  m_Name: DamageText Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,8 +116,9 @@ MonoBehaviour:
   text: {fileID: 6767484698650775409}
   player: {fileID: 0}
   lifeTime: 1
-  minDistance: 1.8
+  minDistance: 1
   maxDistance: 2
+  initialPosition: {x: 0, y: 0, z: 0}
   targetPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &7584078377268359558
 GameObject:

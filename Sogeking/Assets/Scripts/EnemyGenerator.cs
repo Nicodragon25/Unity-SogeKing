@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class EnemyGenerator : MonoBehaviour
 {
-
-    public GameObject enemyPrefab;
+    public List<GameObject> enemies = new List<GameObject>();
 
     float minXDistance = -50;
     float maxXDistance = -30;
@@ -14,9 +13,14 @@ public class EnemyGenerator : MonoBehaviour
 
     float TimePass;
     public float SpawnCD;
+
+    public int maxStrongEnemies;
+    public int maxNormalEnemies;
+    bool strongEnemyEliminated = false;
+    bool normalEnemyEliminated = false;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -24,8 +28,11 @@ public class EnemyGenerator : MonoBehaviour
     {
         if (TimePass > SpawnCD)
         {
-            SpawnEnemy();
-            TimePass = 0;
+            if (enemies.Count > 0)
+            {
+                SpawnEnemy();
+                TimePass = 0;
+            }
         }
         else TimePass += Time.deltaTime;
     }
@@ -34,8 +41,42 @@ public class EnemyGenerator : MonoBehaviour
     {
         float RandomPositionX = Random.Range(minXDistance, maxXDistance);
         float RandomPositionZ = Random.Range(minZDistance, maxZDistance);
-        Vector3 spawnPosition = new Vector3(RandomPositionX, 1, RandomPositionZ);
-        transform.position = spawnPosition;
-        Instantiate(enemyPrefab,spawnPosition, Quaternion.identity);
+        int randomEnemy = Random.Range(0, enemies.Count);
+        Vector3 spawnPosition = new Vector3(RandomPositionX, 0.5f, RandomPositionZ);
+        
+        Instantiate(enemies[randomEnemy], spawnPosition, Quaternion.identity);
+
+        if (enemies[randomEnemy].gameObject.name == "Strong Enemy")
+        {
+            maxStrongEnemies--;
+        }
+        if (maxStrongEnemies <= 0 && !strongEnemyEliminated)
+        {
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                GameObject strongEnemy = enemies[i];
+                if (strongEnemy.name.Contains("Strong"))
+                {
+                    enemies.Remove(strongEnemy);
+                    strongEnemyEliminated = true;
+                }
+            }
+        }
+        if (enemies[randomEnemy].gameObject.name == "Enemy")
+        {
+            maxNormalEnemies--;
+        }
+        if (maxNormalEnemies <= 0 && !normalEnemyEliminated)
+        {
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                GameObject normalEnemy = enemies[i];
+                if (normalEnemy.name == "Enemy")
+                {
+                    enemies.Remove(normalEnemy);
+                    normalEnemyEliminated = true;
+                }
+            }
+        }
     }
 }

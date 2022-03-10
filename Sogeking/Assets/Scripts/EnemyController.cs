@@ -6,12 +6,14 @@ public class EnemyController : MonoBehaviour
 {
     public GameObject door;
     public GameObject shootPoint;
+    public GameObject damageText;
     public Rigidbody rb;
     public float speed;
-    public float damage;
+    public float enemyDamage;
+    public float enemyHp;
     Vector3 lookPos;
 
-
+    public LayerMask fortLayer;
     RaycastHit hit;
     RaycastHit hitDoor;
     Vector3 offset = new Vector3(0, 0.1f, 0);
@@ -33,7 +35,6 @@ public class EnemyController : MonoBehaviour
         door = GameObject.FindGameObjectWithTag("Door");
         lookPos = door.transform.localPosition - transform.position;
         lookPos.y = 0;
-        
     }
     void Update()
     {
@@ -48,9 +49,6 @@ public class EnemyController : MonoBehaviour
             canTryMoving = false;
         }
         if (moveTimePass > moveCooldown) canMove = true;
-    }
-    private void LateUpdate()
-    {
         RayCasting();
     }
     void EnemyMovement()
@@ -69,9 +67,9 @@ public class EnemyController : MonoBehaviour
     {
         if (canAttack)
         {
-            if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.TransformDirection(Vector3.forward), out hitDoor, rayDistanceDoor))
+            if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.TransformDirection(Vector3.forward), out hitDoor, rayDistanceDoor, fortLayer))
             {
-                if (hitDoor.collider.CompareTag("Door") && speed == 0)
+                if (hitDoor.collider.CompareTag("Door") && !canMove)
                 {
                     Attack();
                     canAttack = false;
@@ -91,7 +89,13 @@ public class EnemyController : MonoBehaviour
             if (moveTimePass > moveCooldown) canMove = true;
         }
     }
-
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.layer == 31)
+        {
+            TakeDamage(other.gameObject.GetComponent<ArrowController>().arrowDmg);
+        }
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.white;
@@ -104,6 +108,19 @@ public class EnemyController : MonoBehaviour
     }
     void Attack()
     {
-        door.GetComponent<DoorController>().TakeDamage(damage);
+        door.GetComponent<DoorController>().TakeDamage(enemyDamage);
+    }
+    void TakeDamage(float dmg)
+    {
+        DamageIndicator enemyIndicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
+        enemyIndicator.SetDamageNumber(dmg);
+        enemyIndicator.transform.SetParent(gameObject.transform, true);
+        enemyHp -= dmg;
+        if (enemyHp < 0)
+        {
+            enemyIndicator.gameObject.transform.parent = null;
+            Destroy(gameObject);
+        }
+        //enemyIndicator.GetComponent<DamageIndicator>().player = GameObject.FindGameObjectWithTag("Player");
     }
 }

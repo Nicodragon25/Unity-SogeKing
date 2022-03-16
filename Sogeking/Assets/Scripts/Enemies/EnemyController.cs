@@ -4,41 +4,34 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+
+    [SerializeField] protected EnemyData enemyStats;
     public GameObject door;
     public GameObject shootPoint;
     public GameObject damageText;
-    public Rigidbody rb;
-    public float speed;
-    public int enemyDamage;
-    public float enemyHp;
-    Vector3 lookPos;
+        Vector3 lookPos;
 
     public LayerMask fortLayer;
     RaycastHit hit;
     RaycastHit hitDoor;
     Vector3 offset = new Vector3(0, 0.1f, 0);
-    [Range(0.0f, 5f)]
-    public float rayDistance;
-    [Range(0.0f, 30f)]
-    public float rayDistanceDoor;
+
 
     bool canAttack = true;
     float timePass;
-    public float attackCooldown;
-    public bool canMove = true;
-    public bool canTryMoving = true;
+    bool canMove = true;
+    bool canTryMoving = true;
     float moveTimePass;
-    public float moveCooldown;
 
-    public int attacksRemaining;
-
-    public enum EnemyType {normal, fast, slow};
-    public EnemyType enemyType;
+    float RuntimeEnemyHp;
     private void Start()
     {
+        shootPoint = gameObject.transform.GetChild(0).gameObject;
         door = GameObject.FindGameObjectWithTag("Door");
+        fortLayer = LayerMask.GetMask("Fort");
         lookPos = door.transform.localPosition - transform.position;
         lookPos.y = 0;
+        RuntimeEnemyHp = enemyStats.enemyHp;
     }
     void Update()
     {
@@ -46,20 +39,20 @@ public class EnemyController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 50 * Time.deltaTime);
         EnemyMovement();
         if (!canAttack) timePass += Time.deltaTime;
-        if (timePass > attackCooldown) canAttack = true;
+        if (timePass > enemyStats.attackCooldown) canAttack = true;
         if (canTryMoving)
         {
            moveTimePass += Time.deltaTime;
             canTryMoving = false;
         }
-        if (moveTimePass > moveCooldown) canMove = true;
+        if (moveTimePass > enemyStats.moveCooldown) canMove = true;
         RayCasting();
     }
     void EnemyMovement()
     {
         if (canMove)
         {
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            transform.Translate(Vector3.forward * enemyStats.speed * Time.deltaTime);
         }
         if (!canMove)
         {
@@ -71,7 +64,7 @@ public class EnemyController : MonoBehaviour
     {
         if (canAttack)
         {
-            if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.TransformDirection(Vector3.forward), out hitDoor, rayDistanceDoor, fortLayer))
+            if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.TransformDirection(Vector3.forward), out hitDoor, enemyStats.rayDistanceDoor, fortLayer))
             {
                 if (hitDoor.collider.CompareTag("Door") && !canMove)
                 {
@@ -81,16 +74,16 @@ public class EnemyController : MonoBehaviour
                 }
             }
         }
-        if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.TransformDirection(Vector3.forward), out hit, rayDistance))
+        if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.TransformDirection(Vector3.forward), out hit, enemyStats.rayDistance))
         {
             canMove = false;
             moveTimePass = 0;
             canTryMoving = false;
         }
-        if (!Physics.Raycast(shootPoint.transform.position, shootPoint.transform.TransformDirection(Vector3.forward), out hit, rayDistance))
+        if (!Physics.Raycast(shootPoint.transform.position, shootPoint.transform.TransformDirection(Vector3.forward), out hit, enemyStats.rayDistance))
         {
             canTryMoving = true;
-            if (moveTimePass > moveCooldown) canMove = true;
+            if (moveTimePass > enemyStats.moveCooldown) canMove = true;
         }
     }
     private void OnCollisionEnter(Collision other)
@@ -103,46 +96,25 @@ public class EnemyController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.white;
-        Vector3 enemyGizmosDirection = shootPoint.transform.TransformDirection(Vector3.forward) * rayDistance;
+        Vector3 enemyGizmosDirection = shootPoint.transform.TransformDirection(Vector3.forward) * enemyStats.rayDistance;
         Gizmos.DrawRay(shootPoint.transform.position, enemyGizmosDirection);
 
         Gizmos.color = Color.red;
-        Vector3 doorGizmosDirection = shootPoint.transform.TransformDirection(Vector3.forward) * rayDistanceDoor;
+        Vector3 doorGizmosDirection = shootPoint.transform.TransformDirection(Vector3.forward) * enemyStats.rayDistanceDoor;
         Gizmos.DrawRay(shootPoint.transform.position + offset, doorGizmosDirection);
     }
-    void Attack()
+    protected virtual void Attack()
     {
-        //door.GetComponent<DoorController>().TakeDamage(enemyDamage);
 
-
-        switch (enemyType)
-        {
-            case EnemyType.normal:
-                    door.GetComponent<DoorController>().TakeDamage(enemyDamage);
-                break;
-            case EnemyType.fast:
-                if (attacksRemaining > 0)
-                {
-                    door.GetComponent<DoorController>().TakeDamage(enemyDamage);
-                    attacksRemaining--;
-                }
-                break;
-            case EnemyType.slow:
-                if(attacksRemaining > 0)
-                {
-                    door.GetComponent<DoorController>().TakeDamage(enemyDamage);
-                    attacksRemaining--;
-                }
-                break; 
-        }
+       door.GetComponent<DoorController>().TakeDamage(enemyStats.enemyDamage);
     }
     void TakeDamage(float dmg)
     {
         DamageIndicator enemyIndicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
         enemyIndicator.SetDamageNumber(dmg);
         //enemyIndicator.transform.SetParent(gameObject.transform, true);
-        enemyHp -= dmg;
-        if (enemyHp <= 0)
+        RuntimeEnemyHp -= dmg;
+        if (RuntimeEnemyHp <= 0)
         {
             enemyIndicator.gameObject.transform.parent = null;
             Destroy(gameObject);

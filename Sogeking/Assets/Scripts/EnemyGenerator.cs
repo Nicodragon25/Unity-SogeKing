@@ -6,6 +6,8 @@ public class EnemyGenerator : MonoBehaviour
 {
     public List<GameObject> enemies = new List<GameObject>();
 
+
+    GameObject enemy;
     float minXDistance = -50;
     float maxXDistance = -30;
     float minZDistance = -14;
@@ -14,6 +16,7 @@ public class EnemyGenerator : MonoBehaviour
     float TimePass;
     public float SpawnCD;
 
+    int spawnedEnemies;
     public int maxNormalEnemies;
     public int maxStrongEnemies;
     public int maxFastEnemies;
@@ -32,8 +35,11 @@ public class EnemyGenerator : MonoBehaviour
         {
             if (enemies.Count > 0)
             {
-                SpawnEnemy();
-                TimePass = 0;
+                if (GameObject.FindGameObjectWithTag("Door")??false)
+                {
+                    SpawnEnemy();
+                    TimePass = 0;
+                }
             }
         }
         else TimePass += Time.deltaTime;
@@ -45,19 +51,28 @@ public class EnemyGenerator : MonoBehaviour
         float RandomPositionZ = Random.Range(minZDistance, maxZDistance);
         int randomEnemy = Random.Range(0, enemies.Count);
         Vector3 spawnPosition = new Vector3(RandomPositionX, 0.5f, RandomPositionZ);
-        
-        Instantiate(enemies[randomEnemy], spawnPosition, Quaternion.identity);
 
-
-        switch (enemies[randomEnemy].GetComponent<EnemyController>().enemyType)
+        if(spawnedEnemies < 2 && TimePass > SpawnCD)
         {
-            case EnemyController.EnemyType.normal:
+            enemy = Instantiate(enemies[0], spawnPosition, Quaternion.identity);
+            spawnedEnemies++;
+            TimePass = 0;
+        }
+        if (spawnedEnemies >= 2 && TimePass > SpawnCD)
+        {
+            enemy = Instantiate(enemies[randomEnemy], spawnPosition, Quaternion.identity);
+            spawnedEnemies++;
+            TimePass = 0;
+        }
+        switch (enemy.name)
+        {
+            case "Enemy(Clone)":
                 maxNormalEnemies--;
                 break;
-            case EnemyController.EnemyType.slow:
+            case "Heavy Enemy(Clone)":
                 maxStrongEnemies--;
                 break;
-            case EnemyController.EnemyType.fast:
+            case "Light Enemy(Clone)":
                 maxFastEnemies--;
                 break;
         }
@@ -67,7 +82,7 @@ public class EnemyGenerator : MonoBehaviour
             for (int i = 0; i < enemies.Count; i++)
             {
                 GameObject slowEnemy = enemies[i];
-                if (slowEnemy.name == "Slow Enemy")
+                if (slowEnemy.name == "Heavy Enemy")
                 {
                     enemies.Remove(slowEnemy);
                     strongEnemyEliminated = true;
@@ -92,7 +107,7 @@ public class EnemyGenerator : MonoBehaviour
             for (int i = 0; i < enemies.Count; i++)
             {
                 GameObject fastEnemy = enemies[i];
-                if (fastEnemy.name == "Fast Enemy")
+                if (fastEnemy.name == "Light Enemy")
                 {
                     enemies.Remove(fastEnemy);
                     fastEnemyEliminated = true;

@@ -15,6 +15,6 @@ public class DoorController : MonoBehaviour
     public void TakeDamage(int doorDmgTaken)
     {
         doorHP -= doorDmgTaken;
-        if (doorHP <= 0) Destroy(gameObject, 0.5f);
+        if (doorHP <= 0) gameObject.SetActive(false);
     }
 }

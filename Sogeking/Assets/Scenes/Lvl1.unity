@@ -453,10 +453,10 @@ MonoBehaviour:
   - {fileID: 647939126954112446, guid: a6c26a61a6f203842bd02d43c60fd096, type: 3}
   - {fileID: 647939126954112446, guid: 990a4886c82b11649b0db60f38bff26d, type: 3}
   - {fileID: 647939126954112446, guid: 58cd678f2a670274aa80fc21a48ad18a, type: 3}
-  SpawnCD: 3.5
+  SpawnCD: 3
   maxNormalEnemies: 6
   maxStrongEnemies: 2
-  maxFastEnemies: 3
+  maxFastEnemies: 4
 --- !u!4 &268892155
 Transform:
   m_ObjectHideFlags: 0
@@ -530,14 +530,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9209949999897311301, guid: a6c26a61a6f203842bd02d43c60fd096, type: 3}
-      propertyPath: speed
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9209949999897311301, guid: a6c26a61a6f203842bd02d43c60fd096, type: 3}
-      propertyPath: damageText
-      value: 
-      objectReference: {fileID: 5940899639480595215, guid: dbacbece6c968e84cbb54e04d71ff59e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6c26a61a6f203842bd02d43c60fd096, type: 3}
 --- !u!1 &509665116
@@ -1742,7 +1734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d0b88d6d9c7c74d9dd7ff439263bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorHP: 500
+  doorHP: 750
 --- !u!1 &1348396872
 GameObject:
   m_ObjectHideFlags: 0

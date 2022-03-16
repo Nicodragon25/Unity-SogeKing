@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8745020773305930847}
   - component: {fileID: 4006130061734383519}
   - component: {fileID: 5224404063708846003}
-  - component: {fileID: 9209949999897311301}
+  - component: {fileID: -2733234657030021632}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -97,7 +97,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &9209949999897311301
+--- !u!114 &-2733234657030021632
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,27 +106,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 647939126954112446}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4574a94f21891b44ad40cf2c2ea7c08, type: 3}
+  m_Script: {fileID: 11500000, guid: b344ab2f9a217184894fa69665f275bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyStats: {fileID: 11400000, guid: 26fdcfa1480e0ec4682ef1f77af28eb9, type: 2}
   door: {fileID: 0}
-  shootPoint: {fileID: 5580269461287173726}
+  shootPoint: {fileID: 0}
   damageText: {fileID: 5940899639480595215, guid: 8c9e8e4d9cd9c234abb754cccc12171f, type: 3}
-  rb: {fileID: 0}
-  speed: 6
-  enemyDamage: 10
-  enemyHp: 40
   fortLayer:
     serializedVersion: 2
-    m_Bits: 134217728
-  rayDistance: 0.5
-  rayDistanceDoor: 4
-  attackCooldown: 2
-  canMove: 1
-  canTryMoving: 1
-  moveCooldown: 0.2
-  attacksRemaining: 0
-  enemyType: 0
+    m_Bits: 0
 --- !u!1 &5580269461287173726
 GameObject:
   m_ObjectHideFlags: 0

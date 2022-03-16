@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    public float doorHP;
+    public int doorHP;
 
 
     // Update is called once per frame
@@ -12,7 +12,7 @@ public class DoorController : MonoBehaviour
     {
         
     }
-    public void TakeDamage(float doorDmgTaken)
+    public void TakeDamage(int doorDmgTaken)
     {
         doorHP -= doorDmgTaken;
         if (doorHP <= 0) Destroy(gameObject, 0.5f);

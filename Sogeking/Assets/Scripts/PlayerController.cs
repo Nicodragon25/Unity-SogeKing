@@ -4,19 +4,25 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed;
-    public float startSpeed;
+    
+    public GameObject gameManager;
     public GameObject arrowGenerator;
     public GameObject arrow;
     public GameObject playerViewPoint;
 
+    public float speed;
+    public float startSpeed;
 
     public bool loadedArrow = false;
 
-    public float lmbDownTime;
+    //public float lmbDownTime;
     public float arrowSpeed;
     public float finalArrowSpeed;
-    public float shotTimePass;
+
+
+    public float minArrowSpeed;
+    public float maxArrowSpeed;
+    //public float shotTimePass;
 
     float timePassSpawn;
     float timePassShoot;
@@ -52,12 +58,16 @@ public class PlayerController : MonoBehaviour
             arrowGenerator.GetComponent<ArrowGenerator>().arrowSpawn(playerViewPoint.transform.rotation.eulerAngles);
             loadedArrow = true;
             canArrowSpawn = false;
+            finalArrowSpeed = minArrowSpeed;
+            gameManager.GetComponent<GameManager>().powerBar.gameObject.SetActive(true);
+            gameManager.GetComponent<GameManager>().powerBar.value = minArrowSpeed;
         }
         if (Input.GetMouseButtonUp(1))
         {
             if (loadedArrow)
             {
                 arrowGenerator.GetComponent<ArrowGenerator>().arrow.GetComponent<ArrowController>().loadedArrowDestroy();
+                gameManager.GetComponent<GameManager>().powerBar.gameObject.SetActive(false);
             }
         }
 
@@ -68,6 +78,9 @@ public class PlayerController : MonoBehaviour
                 arrowGenerator.GetComponent<ArrowGenerator>().arrowSpawn(playerViewPoint.transform.rotation.eulerAngles);
                 loadedArrow = true;
                 canArrowSpawn = false;
+                finalArrowSpeed = minArrowSpeed;
+                gameManager.GetComponent<GameManager>().powerBar.gameObject.SetActive(true);
+                gameManager.GetComponent<GameManager>().powerBar.value = minArrowSpeed;
             }
 
             if (!canArrowSpawn && loadedArrow == false)
@@ -79,20 +92,22 @@ public class PlayerController : MonoBehaviour
                 canArrowSpawn = true;
                 timePassSpawn = 0;
             }
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButton(0))
             {
-                lmbDownTime = Time.time;
+                //lmbDownTime = Time.time;
+                if(finalArrowSpeed < maxArrowSpeed) finalArrowSpeed += Time.deltaTime * arrowSpeed;
+                if(finalArrowSpeed > maxArrowSpeed) finalArrowSpeed = maxArrowSpeed;
+                gameManager.GetComponent<GameManager>().ChargePower(finalArrowSpeed);
             }
-            if (Input.GetMouseButtonUp(0) && canArrowShoot)
+            if (Input.GetMouseButtonUp(0) && loadedArrow)
             {
-                shotTimePass = Time.time - lmbDownTime;
-                if (shotTimePass <= 2) finalArrowSpeed = arrowSpeed * shotTimePass;
-                if (shotTimePass > 2) finalArrowSpeed = arrowSpeed * 2;
+                //shotTimePass = Time.time - lmbDownTime;
+                //if (shotTimePass <= 2) finalArrowSpeed = arrowSpeed * shotTimePass;
+                //if (shotTimePass > 2) finalArrowSpeed = arrowSpeed * 2;
                 Shoot(finalArrowSpeed);
                 loadedArrow = false;
-                canArrowShoot = false;
-                lmbDownTime = 0;
-
+                //canArrowShoot = false;
+                //lmbDownTime = 0;
                
             }
             if (!canArrowShoot) timePassShoot += Time.deltaTime;
@@ -114,6 +129,7 @@ public class PlayerController : MonoBehaviour
     void Shoot(float ShotSpeed)
     {
         arrowGenerator.GetComponent<ArrowGenerator>().arrowShot(ShotSpeed, Mathf.Ceil(finalArrowSpeed / 4));
+        gameManager.GetComponent<GameManager>().powerBar.gameObject.SetActive(false);
     }
     void ArrowSwitch(string arrowType)
     {

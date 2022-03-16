@@ -14,10 +14,12 @@ public class EnemyGenerator : MonoBehaviour
     float TimePass;
     public float SpawnCD;
 
-    public int maxStrongEnemies;
     public int maxNormalEnemies;
+    public int maxStrongEnemies;
+    public int maxFastEnemies;
     bool strongEnemyEliminated = false;
     bool normalEnemyEliminated = false;
+    bool fastEnemyEliminated = false;
     void Start()
     {
 
@@ -46,26 +48,33 @@ public class EnemyGenerator : MonoBehaviour
         
         Instantiate(enemies[randomEnemy], spawnPosition, Quaternion.identity);
 
-        if (enemies[randomEnemy].gameObject.name == "Strong Enemy")
+
+        switch (enemies[randomEnemy].GetComponent<EnemyController>().enemyType)
         {
-            maxStrongEnemies--;
+            case EnemyController.EnemyType.normal:
+                maxNormalEnemies--;
+                break;
+            case EnemyController.EnemyType.slow:
+                maxStrongEnemies--;
+                break;
+            case EnemyController.EnemyType.fast:
+                maxFastEnemies--;
+                break;
         }
+
         if (maxStrongEnemies <= 0 && !strongEnemyEliminated)
         {
             for (int i = 0; i < enemies.Count; i++)
             {
-                GameObject strongEnemy = enemies[i];
-                if (strongEnemy.name.Contains("Strong"))
+                GameObject slowEnemy = enemies[i];
+                if (slowEnemy.name == "Slow Enemy")
                 {
-                    enemies.Remove(strongEnemy);
+                    enemies.Remove(slowEnemy);
                     strongEnemyEliminated = true;
                 }
             }
         }
-        if (enemies[randomEnemy].gameObject.name == "Enemy")
-        {
-            maxNormalEnemies--;
-        }
+
         if (maxNormalEnemies <= 0 && !normalEnemyEliminated)
         {
             for (int i = 0; i < enemies.Count; i++)
@@ -78,5 +87,18 @@ public class EnemyGenerator : MonoBehaviour
                 }
             }
         }
+        if (maxFastEnemies <= 0 && !fastEnemyEliminated)
+        {
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                GameObject fastEnemy = enemies[i];
+                if (fastEnemy.name == "Fast Enemy")
+                {
+                    enemies.Remove(fastEnemy);
+                    fastEnemyEliminated = true;
+                }
+            }
+        }
+
     }
 }

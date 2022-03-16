@@ -100,13 +100,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   arrowSpeed: 0
-  ArrowDmg: 0
-  destroyTime: 1000
+  destroyTime: 3
   rb: {fileID: 3288622243920001268}
   canMove: 0
   crashRotation: {x: 0, y: 0, z: 0, w: 0}
   torque: 0
-  gravity: 0
+  arrowDmg: 0
+  arrowHsDmg: 0
   hasTrail: 0
 --- !u!54 &3288622243920001268
 Rigidbody:

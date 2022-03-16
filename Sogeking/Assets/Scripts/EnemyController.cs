@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
     public GameObject damageText;
     public Rigidbody rb;
     public float speed;
-    public float enemyDamage;
+    public int enemyDamage;
     public float enemyHp;
     Vector3 lookPos;
 
@@ -30,6 +30,10 @@ public class EnemyController : MonoBehaviour
     float moveTimePass;
     public float moveCooldown;
 
+    public int attacksRemaining;
+
+    public enum EnemyType {normal, fast, slow};
+    public EnemyType enemyType;
     private void Start()
     {
         door = GameObject.FindGameObjectWithTag("Door");
@@ -108,15 +112,37 @@ public class EnemyController : MonoBehaviour
     }
     void Attack()
     {
-        door.GetComponent<DoorController>().TakeDamage(enemyDamage);
+        //door.GetComponent<DoorController>().TakeDamage(enemyDamage);
+
+
+        switch (enemyType)
+        {
+            case EnemyType.normal:
+                    door.GetComponent<DoorController>().TakeDamage(enemyDamage);
+                break;
+            case EnemyType.fast:
+                if (attacksRemaining > 0)
+                {
+                    door.GetComponent<DoorController>().TakeDamage(enemyDamage);
+                    attacksRemaining--;
+                }
+                break;
+            case EnemyType.slow:
+                if(attacksRemaining > 0)
+                {
+                    door.GetComponent<DoorController>().TakeDamage(enemyDamage);
+                    attacksRemaining--;
+                }
+                break; 
+        }
     }
     void TakeDamage(float dmg)
     {
         DamageIndicator enemyIndicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
         enemyIndicator.SetDamageNumber(dmg);
-        enemyIndicator.transform.SetParent(gameObject.transform, true);
+        //enemyIndicator.transform.SetParent(gameObject.transform, true);
         enemyHp -= dmg;
-        if (enemyHp < 0)
+        if (enemyHp <= 0)
         {
             enemyIndicator.gameObject.transform.parent = null;
             Destroy(gameObject);

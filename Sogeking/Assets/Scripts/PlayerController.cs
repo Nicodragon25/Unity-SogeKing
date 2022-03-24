@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public GameObject arrowGenerator;
     public GameObject arrow;
     public GameObject playerViewPoint;
+    public GameObject bow;
 
     public float speed;
     public float startSpeed;
@@ -23,13 +24,11 @@ public class PlayerController : MonoBehaviour
     public float minArrowSpeed;
     public float maxArrowSpeed;
     //public float shotTimePass;
-
     float timePassSpawn;
     float timePassShoot;
     public float arrowSCD;
     bool canArrowSpawn;
     public bool canArrowShoot;
-
     void Start()
     {
        startSpeed = speed;
@@ -56,14 +55,17 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             arrowGenerator.GetComponent<ArrowGenerator>().arrowSpawn(playerViewPoint.transform.rotation.eulerAngles);
+            arrow = arrowGenerator.GetComponent<ArrowGenerator>().arrow;
             loadedArrow = true;
             canArrowSpawn = false;
             finalArrowSpeed = minArrowSpeed;
             gameManager.GetComponent<GameManager>().powerBar.gameObject.SetActive(true);
             gameManager.GetComponent<GameManager>().powerBar.value = minArrowSpeed;
+            bow.GetComponent<Animator>().SetBool("HasShot", false);
         }
         if (Input.GetMouseButtonUp(1))
         {
+            bow.GetComponent<Animator>().SetBool("IsAiming", false);
             if (loadedArrow)
             {
                 arrowGenerator.GetComponent<ArrowGenerator>().arrow.GetComponent<ArrowController>().loadedArrowDestroy();
@@ -73,14 +75,17 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButton(1))
         {
+            bow.GetComponent<Animator>().SetBool("IsAiming", true);
             if (!loadedArrow && canArrowSpawn)
             {
                 arrowGenerator.GetComponent<ArrowGenerator>().arrowSpawn(playerViewPoint.transform.rotation.eulerAngles);
+                arrow = arrowGenerator.GetComponent<ArrowGenerator>().arrow;
                 loadedArrow = true;
                 canArrowSpawn = false;
                 finalArrowSpeed = minArrowSpeed;
                 gameManager.GetComponent<GameManager>().powerBar.gameObject.SetActive(true);
                 gameManager.GetComponent<GameManager>().powerBar.value = minArrowSpeed;
+                bow.GetComponent<Animator>().SetBool("HasShot", false);
             }
 
             if (!canArrowSpawn && loadedArrow == false)
@@ -94,18 +99,26 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetMouseButton(0))
             {
-                //lmbDownTime = Time.time;
                 if(finalArrowSpeed < maxArrowSpeed) finalArrowSpeed += Time.deltaTime * arrowSpeed;
-                if(finalArrowSpeed > maxArrowSpeed) finalArrowSpeed = maxArrowSpeed;
+                if(finalArrowSpeed >= maxArrowSpeed)
+                {
+                    finalArrowSpeed = maxArrowSpeed;
+                }
                 gameManager.GetComponent<GameManager>().ChargePower(finalArrowSpeed);
+
+                bow.GetComponent<Animator>().Play("Draw");
+                arrow.GetComponent<Animator>().Play("ArrowDraw");
             }
             if (Input.GetMouseButtonUp(0) && loadedArrow)
             {
                 //shotTimePass = Time.time - lmbDownTime;
                 //if (shotTimePass <= 2) finalArrowSpeed = arrowSpeed * shotTimePass;
                 //if (shotTimePass > 2) finalArrowSpeed = arrowSpeed * 2;
+
+                arrow.GetComponent<Animator>().enabled = false;
                 Shoot(finalArrowSpeed);
                 loadedArrow = false;
+                bow.GetComponent<Animator>().SetBool("HasShot", true);
                 //canArrowShoot = false;
                 //lmbDownTime = 0;
                

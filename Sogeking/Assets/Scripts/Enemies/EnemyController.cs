@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
     public GameObject door;
     public GameObject shootPoint;
     public GameObject damageText;
-        Vector3 lookPos;
+    Vector3 lookPos;
 
     public LayerMask fortLayer;
     RaycastHit hit;
@@ -19,21 +19,22 @@ public class EnemyController : MonoBehaviour
 
     bool canAttack = true;
     float timePass;
-    bool canMove = true;
+    protected bool canMove = true;
     bool canTryMoving = true;
     float moveTimePass;
 
-    float RuntimeEnemyHp;
-    private void Start()
+    [SerializeField] float RuntimeEnemyHp;
+    protected virtual void Start()
     {
-        shootPoint = gameObject.transform.GetChild(0).gameObject;
+        //shootPoint = gameObject.transform.GetChild(0).gameObject;
+        shootPoint = gameObject.transform.Find("ShootPoint").gameObject;
         door = GameObject.FindGameObjectWithTag("Door");
         fortLayer = LayerMask.GetMask("Fort");
         lookPos = door.transform.localPosition - transform.position;
         lookPos.y = 0;
         RuntimeEnemyHp = enemyStats.enemyHp;
     }
-    void Update()
+    protected virtual void Update()
     {
         Quaternion rotation = Quaternion.LookRotation(lookPos);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 50 * Time.deltaTime);
@@ -42,7 +43,7 @@ public class EnemyController : MonoBehaviour
         if (timePass > enemyStats.attackCooldown) canAttack = true;
         if (canTryMoving)
         {
-           moveTimePass += Time.deltaTime;
+            moveTimePass += Time.deltaTime;
             canTryMoving = false;
         }
         if (moveTimePass > enemyStats.moveCooldown) canMove = true;
@@ -106,7 +107,7 @@ public class EnemyController : MonoBehaviour
     protected virtual void Attack()
     {
 
-       door.GetComponent<DoorController>().TakeDamage(enemyStats.enemyDamage);
+        door.GetComponent<DoorController>().TakeDamage(enemyStats.enemyDamage);
     }
     void TakeDamage(float dmg)
     {
@@ -120,5 +121,20 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
         }
         //enemyIndicator.GetComponent<DamageIndicator>().player = GameObject.FindGameObjectWithTag("Player");
+    }
+    public void OnChildrenCollision(string name, Collision other)
+    {
+        if(other.gameObject.layer == 31)
+        {
+            if (name == "head")
+            {
+                TakeDamage(other.gameObject.GetComponent<ArrowController>().arrowDmg * 1.25f);
+            }
+            if(name != "head")
+            {
+                TakeDamage(other.gameObject.GetComponent<ArrowController>().arrowDmg);
+            }
+        }
+        
     }
 }

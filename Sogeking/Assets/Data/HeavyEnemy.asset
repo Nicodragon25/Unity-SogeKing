@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bea9642455eecb498f6c29be550b3a8, type: 3}
   m_Name: HeavyEnemy
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 5
   enemyDamage: 45
   enemyHp: 60
   moveCooldown: 0.2

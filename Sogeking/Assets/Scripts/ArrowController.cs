@@ -11,6 +11,7 @@ public class ArrowController : MonoBehaviour
     public bool canMove = false;
     public Quaternion crashRotation;
     public float torque;
+    Animator arrowAnim;
     bool isStopped;
 
     public float arrowDmg;
@@ -20,10 +21,11 @@ public class ArrowController : MonoBehaviour
     void Start()
     {
         gameObject.GetComponent<TrailRenderer>().enabled = false;
-
-        
+        arrowAnim = gameObject.GetComponent<Animator>();
     }
-
+    private void Update()
+    {
+    }
     void FixedUpdate()
     {
         if(canMove)
@@ -65,7 +67,7 @@ public class ArrowController : MonoBehaviour
                 rb.angularVelocity = Vector3.zero;
                 crashRotation = transform.rotation;
                 isStopped = true;
-
+                gameObject.GetComponent<Collider>().isTrigger = true;
                 break;
             case "Fire":
                 //speed = 0;
@@ -79,6 +81,18 @@ public class ArrowController : MonoBehaviour
                 }
                 break;
                 
+        }
+    }
+
+    public void AnimatorSwitch()
+    {
+        if (arrowAnim.enabled == false)
+        {
+            arrowAnim.enabled = true;
+        }
+        if (arrowAnim.enabled == true)
+        {
+            arrowAnim.enabled = false;
         }
     }
 }

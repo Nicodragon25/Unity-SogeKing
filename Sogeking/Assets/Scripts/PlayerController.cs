@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    
+
     public GameObject gameManager;
     public GameObject arrowGenerator;
     public GameObject arrow;
     public GameObject playerViewPoint;
     public GameObject bow;
+    public GameObject camera;
+    Rigidbody rb;
 
     public float speed;
     public float startSpeed;
@@ -29,29 +31,16 @@ public class PlayerController : MonoBehaviour
     public float arrowSCD;
     bool canArrowSpawn;
     public bool canArrowShoot;
+
     void Start()
     {
-       startSpeed = speed;
+        camera = Camera.main.gameObject;
+        rb = gameObject.GetComponent<Rigidbody>();
+        startSpeed = speed;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey("w")) Move(Vector3.forward);
-        if (Input.GetKey("s")) Move(Vector3.back);
-        if (Input.GetKey("a")) Move(Vector3.left);
-        if (Input.GetKey("d")) Move(Vector3.right);
-
-
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            speed = speed * 2;
-        }
-        if(Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            speed = startSpeed;
-        }
-
         if (Input.GetMouseButtonDown(1))
         {
             arrowGenerator.GetComponent<ArrowGenerator>().arrowSpawn(playerViewPoint.transform.rotation.eulerAngles);
@@ -61,11 +50,11 @@ public class PlayerController : MonoBehaviour
             finalArrowSpeed = minArrowSpeed;
             gameManager.GetComponent<GameManager>().powerBar.gameObject.SetActive(true);
             gameManager.GetComponent<GameManager>().powerBar.value = minArrowSpeed;
-            bow.GetComponent<Animator>().SetBool("HasShot", false);
         }
         if (Input.GetMouseButtonUp(1))
         {
             bow.GetComponent<Animator>().SetBool("IsAiming", false);
+            camera.GetComponent<Animator>().SetBool("IsAiming", false);
             if (loadedArrow)
             {
                 arrowGenerator.GetComponent<ArrowGenerator>().arrow.GetComponent<ArrowController>().loadedArrowDestroy();
@@ -76,6 +65,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             bow.GetComponent<Animator>().SetBool("IsAiming", true);
+            camera.GetComponent<Animator>().SetBool("IsAiming", true);
             if (!loadedArrow && canArrowSpawn)
             {
                 arrowGenerator.GetComponent<ArrowGenerator>().arrowSpawn(playerViewPoint.transform.rotation.eulerAngles);
@@ -99,8 +89,8 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetMouseButton(0))
             {
-                if(finalArrowSpeed < maxArrowSpeed) finalArrowSpeed += Time.deltaTime * arrowSpeed;
-                if(finalArrowSpeed >= maxArrowSpeed)
+                if (finalArrowSpeed < maxArrowSpeed) finalArrowSpeed += Time.deltaTime * arrowSpeed;
+                if (finalArrowSpeed >= maxArrowSpeed)
                 {
                     finalArrowSpeed = maxArrowSpeed;
                 }
@@ -121,22 +111,28 @@ public class PlayerController : MonoBehaviour
                 bow.GetComponent<Animator>().SetBool("HasShot", true);
                 //canArrowShoot = false;
                 //lmbDownTime = 0;
-               
+
             }
             if (!canArrowShoot) timePassShoot += Time.deltaTime;
-            if (timePassShoot >= arrowSCD) 
-            { 
+            if (timePassShoot >= arrowSCD)
+            {
                 canArrowShoot = true;
                 timePassShoot = 0;
             }
         }
 
     }
-
+    private void FixedUpdate()
+    {
+        if (Input.GetKey("w")) Move(Vector3.forward);
+        if (Input.GetKey("s")) Move(Vector3.back);
+        if (Input.GetKey("a")) Move(Vector3.left);
+        if (Input.GetKey("d")) Move(Vector3.right);
+    }
     void Move(Vector3 direction)
     {
-        transform.Translate( direction * speed * Time.deltaTime);
-
+        direction.Normalize();
+        transform.Translate(direction * speed * Time.deltaTime);
     }
 
     void Shoot(float ShotSpeed)
@@ -166,7 +162,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case "Fire":
                 ArrowSwitch("FireArrow");
-            break;
+                break;
 
         }
     }

@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
     Vector3 lookPos;
 
     public LayerMask fortLayer;
+    public LayerMask moveLayer;
     RaycastHit hit;
     RaycastHit hitDoor;
     Vector3 offset = new Vector3(0, 0.1f, 0);
@@ -20,8 +21,13 @@ public class EnemyController : MonoBehaviour
     bool canAttack = true;
     float timePass;
     protected bool canMove = true;
-    bool canTryMoving = true;
+    protected bool canTryMoving = true;
     float moveTimePass;
+
+    bool isDead = false;
+    float hitTimePass;
+    float getHitCoolDown = 0.3f;
+    protected float dieTimer = 5;
 
     [SerializeField] float RuntimeEnemyHp;
     protected virtual void Start()
@@ -48,6 +54,13 @@ public class EnemyController : MonoBehaviour
         }
         if (moveTimePass > enemyStats.moveCooldown) canMove = true;
         RayCasting();
+
+
+        if (canMove) gameObject.GetComponent<Animator>().SetBool("IsMoving", true);
+        if (!canMove) gameObject.GetComponent<Animator>().SetBool("IsMoving", false);
+
+
+        hitTimePass += Time.deltaTime;
     }
     void EnemyMovement()
     {
@@ -67,7 +80,7 @@ public class EnemyController : MonoBehaviour
         {
             if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.TransformDirection(Vector3.forward), out hitDoor, enemyStats.rayDistanceDoor, fortLayer))
             {
-                if (hitDoor.collider.CompareTag("Door") && !canMove)
+                if (hitDoor.collider.CompareTag("Door") && !canMove && !isDead)
                 {
                     Attack();
                     canAttack = false;
@@ -75,13 +88,13 @@ public class EnemyController : MonoBehaviour
                 }
             }
         }
-        if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.TransformDirection(Vector3.forward), out hit, enemyStats.rayDistance))
+        if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.TransformDirection(Vector3.forward), out hit, enemyStats.rayDistance, moveLayer))
         {
             canMove = false;
             moveTimePass = 0;
             canTryMoving = false;
         }
-        if (!Physics.Raycast(shootPoint.transform.position, shootPoint.transform.TransformDirection(Vector3.forward), out hit, enemyStats.rayDistance))
+        if (!Physics.Raycast(shootPoint.transform.position, shootPoint.transform.TransformDirection(Vector3.forward), out hit, enemyStats.rayDistance, moveLayer))
         {
             canTryMoving = true;
             if (moveTimePass > enemyStats.moveCooldown) canMove = true;
@@ -106,19 +119,20 @@ public class EnemyController : MonoBehaviour
     }
     protected virtual void Attack()
     {
-
         door.GetComponent<DoorController>().TakeDamage(enemyStats.enemyDamage);
+        gameObject.GetComponent<Animator>().Play("Attack");
     }
     void TakeDamage(float dmg)
     {
         DamageIndicator enemyIndicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
         enemyIndicator.SetDamageNumber(dmg);
+        gameObject.GetComponent<Animator>().Play("GetHit");
         //enemyIndicator.transform.SetParent(gameObject.transform, true);
         RuntimeEnemyHp -= dmg;
         if (RuntimeEnemyHp <= 0)
         {
             enemyIndicator.gameObject.transform.parent = null;
-            Destroy(gameObject);
+            Die();
         }
         //enemyIndicator.GetComponent<DamageIndicator>().player = GameObject.FindGameObjectWithTag("Player");
     }
@@ -126,15 +140,48 @@ public class EnemyController : MonoBehaviour
     {
         if(other.gameObject.layer == 31)
         {
-            if (name == "head")
+            if(hitTimePass > getHitCoolDown && !isDead)
             {
-                TakeDamage(other.gameObject.GetComponent<ArrowController>().arrowDmg * 1.25f);
-            }
-            if(name != "head")
-            {
-                TakeDamage(other.gameObject.GetComponent<ArrowController>().arrowDmg);
+                
+                if (name == "head")
+                {
+                    if (other.gameObject.CompareTag("Fire"))
+                    {
+                        TakeDamage(other.gameObject.GetComponent<ArrowController>().arrowDmg * 2f);
+                    }
+                    else
+                    {
+                        TakeDamage(other.gameObject.GetComponent<ArrowController>().arrowDmg * 1.25f);
+                    }
+                }
+                if (name != "head")
+                {
+                    if (other.gameObject.CompareTag("Fire"))
+                    {
+                        TakeDamage(other.gameObject.GetComponent<ArrowController>().arrowDmg * 1.5f);
+                    }
+                    else
+                    {
+                        TakeDamage(other.gameObject.GetComponent<ArrowController>().arrowDmg);
+                    }
+                }
+                hitTimePass = 0;
             }
         }
         
+    }
+
+    protected virtual void Die()
+    {
+        gameObject.GetComponent<Animator>().Play("Die");
+        Destroy(gameObject, dieTimer);
+
+        isDead = true;
+        canAttack = false;
+        timePass = -1000f;
+        canMove = false;
+        canTryMoving = false;
+        moveTimePass = -1000;
+        gameObject.layer = 25;
     }
 }

@@ -11,6 +11,7 @@ TagManager:
   - Bounce
   - Enemy
   - Door
+  - FireEffect
   layers:
   - Default
   - TransparentFX
@@ -37,7 +38,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - enemyBody
   - FortLimits
   - Fort
   - Enemies

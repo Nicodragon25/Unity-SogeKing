@@ -15,6 +15,7 @@ public class ArrowController : MonoBehaviour
     bool isStopped;
 
     public float arrowDmg;
+    public float startArrowDmg;
     public float arrowHsDmg;
 
     public bool hasTrail;
@@ -22,6 +23,7 @@ public class ArrowController : MonoBehaviour
     {
         gameObject.GetComponent<TrailRenderer>().enabled = false;
         arrowAnim = gameObject.GetComponent<Animator>();
+        startArrowDmg = arrowDmg;
     }
     private void Update()
     {
@@ -70,20 +72,22 @@ public class ArrowController : MonoBehaviour
                 gameObject.GetComponent<Collider>().isTrigger = true;
                 break;
             case "Fire":
-                //speed = 0;
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
                 crashRotation = transform.rotation;
                 isStopped = true;
-                if (other.gameObject.CompareTag("WoodenWall"))
-                {
-                    Destroy(other.gameObject, 1f);
-                }
+                gameObject.GetComponent<Collider>().isTrigger = true;
                 break;
-                
         }
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("FireEffect"))
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+            gameObject.tag = "Fire";
+        }
+    }
     public void AnimatorSwitch()
     {
         if (arrowAnim.enabled == false)

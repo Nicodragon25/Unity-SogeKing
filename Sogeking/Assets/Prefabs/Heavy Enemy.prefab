@@ -53,6 +53,9 @@ MonoBehaviour:
   fortLayer:
     serializedVersion: 2
     m_Bits: 0
+  moveLayer:
+    serializedVersion: 2
+    m_Bits: 4227858487
   RuntimeEnemyHp: 0
 --- !u!95 &8857937133423013750
 Animator:

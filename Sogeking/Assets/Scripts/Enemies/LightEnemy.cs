@@ -5,16 +5,19 @@ using UnityEngine;
 public class LightEnemy : EnemyController
 {
     public int attacksRemaining;
+    bool lightCanAttack = true;
     protected override void Attack()
     {
-        base.Attack();
+        if(lightCanAttack) base.Attack();
         if (attacksRemaining > 0)
         {
             attacksRemaining--;
         }
         if (attacksRemaining <= 0)
         {
-            Destroy(gameObject, 0.1f);
+            lightCanAttack = false;
+            gameObject.GetComponent<Animator>().SetBool("IsDead", true);
+            Destroy(gameObject, 3f);
         }
     }
 }

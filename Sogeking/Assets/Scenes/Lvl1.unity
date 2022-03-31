@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 75690796}
   m_Layer: 0
   m_Name: Torches
-  m_TagString: Untagged
+  m_TagString: FireEffect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -484,10 +484,10 @@ MonoBehaviour:
   - {fileID: 647939126954112446, guid: a6c26a61a6f203842bd02d43c60fd096, type: 3}
   - {fileID: 647939126954112446, guid: 990a4886c82b11649b0db60f38bff26d, type: 3}
   - {fileID: 647939126954112446, guid: 58cd678f2a670274aa80fc21a48ad18a, type: 3}
-  SpawnCD: 3
-  maxNormalEnemies: 6
-  maxStrongEnemies: 2
-  maxFastEnemies: 4
+  SpawnCD: 2.5
+  maxNormalEnemies: 2
+  maxStrongEnemies: 3
+  maxFastEnemies: 3
 --- !u!4 &268892155
 Transform:
   m_ObjectHideFlags: 0
@@ -502,6 +502,63 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1001 &294238250
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4707563939375301331, guid: 17448b3e9484d444cacc15bbd7d17352, type: 3}
+      propertyPath: m_Name
+      value: Molino
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341111767128283241, guid: 17448b3e9484d444cacc15bbd7d17352, type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341111767128283241, guid: 17448b3e9484d444cacc15bbd7d17352, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 45.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341111767128283241, guid: 17448b3e9484d444cacc15bbd7d17352, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341111767128283241, guid: 17448b3e9484d444cacc15bbd7d17352, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341111767128283241, guid: 17448b3e9484d444cacc15bbd7d17352, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341111767128283241, guid: 17448b3e9484d444cacc15bbd7d17352, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341111767128283241, guid: 17448b3e9484d444cacc15bbd7d17352, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341111767128283241, guid: 17448b3e9484d444cacc15bbd7d17352, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341111767128283241, guid: 17448b3e9484d444cacc15bbd7d17352, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341111767128283241, guid: 17448b3e9484d444cacc15bbd7d17352, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341111767128283241, guid: 17448b3e9484d444cacc15bbd7d17352, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 17448b3e9484d444cacc15bbd7d17352, type: 3}
 --- !u!1001 &391989045
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -512,6 +569,10 @@ PrefabInstance:
     - target: {fileID: 1704125793960160278, guid: 46992be693eccf74695366cbbe2fc460, type: 3}
       propertyPath: m_Name
       value: Torch (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1704125793960160278, guid: 46992be693eccf74695366cbbe2fc460, type: 3}
+      propertyPath: m_TagString
+      value: FireEffect
       objectReference: {fileID: 0}
     - target: {fileID: 1704125793960259638, guid: 46992be693eccf74695366cbbe2fc460, type: 3}
       propertyPath: m_RootOrder
@@ -1118,6 +1179,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Torch (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1704125793960160278, guid: 46992be693eccf74695366cbbe2fc460, type: 3}
+      propertyPath: m_TagString
+      value: FireEffect
+      objectReference: {fileID: 0}
     - target: {fileID: 1704125793960259638, guid: 46992be693eccf74695366cbbe2fc460, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1197,6 +1262,10 @@ PrefabInstance:
     - target: {fileID: 2745621540027930443, guid: 46992be693eccf74695366cbbe2fc460, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5053434329146184488, guid: 46992be693eccf74695366cbbe2fc460, type: 3}
+      propertyPath: m_TagString
+      value: FireEffect
       objectReference: {fileID: 0}
     - target: {fileID: 7593726291676068466, guid: 46992be693eccf74695366cbbe2fc460, type: 3}
       propertyPath: m_Range
@@ -1591,95 +1660,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1053851488 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7907762245599840139, guid: 1f6a077df07b19e44b181faa295e13f2, type: 3}
-  m_PrefabInstance: {fileID: 1427263764}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1053851489 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7907762245599840151, guid: 1f6a077df07b19e44b181faa295e13f2, type: 3}
-  m_PrefabInstance: {fileID: 1427263764}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1053851493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1053851488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 1053851489}
-  volumeLayer:
-    serializedVersion: 2
-    m_Bits: 1
-  stopNaNPropagation: 1
-  finalBlitToCameraTarget: 0
-  antialiasingMode: 0
-  temporalAntialiasing:
-    jitterSpread: 0.162
-    sharpness: 0.25
-    stationaryBlending: 0.95
-    motionBlending: 0.85
-  subpixelMorphologicalAntialiasing:
-    quality: 2
-  fastApproximateAntialiasing:
-    fastMode: 0
-    keepAlpha: 0
-  fog:
-    enabled: 1
-    excludeSkybox: 1
-  debugLayer:
-    lightMeter:
-      width: 512
-      height: 256
-      showCurves: 1
-    histogram:
-      width: 512
-      height: 256
-      channel: 3
-    waveform:
-      exposure: 0.12
-      height: 256
-    vectorscope:
-      size: 256
-      exposure: 0.12
-    overlaySettings:
-      linearDepth: 0
-      motionColorIntensity: 4
-      motionGridSize: 64
-      colorBlindnessType: 0
-      colorBlindnessStrength: 1
-  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 0
-  m_ShowCustomSorter: 0
-  breakBeforeColorGrading: 0
-  m_BeforeTransparentBundles: []
-  m_BeforeStackBundles: []
-  m_AfterStackBundles: []
---- !u!95 &1053851494
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1053851488}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: debae2a1f7cb60344b25df4cb9653ab3, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &1091815366 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1704125793960259638, guid: 46992be693eccf74695366cbbe2fc460, type: 3}
@@ -2220,25 +2200,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7907762245599840150, guid: 1f6a077df07b19e44b181faa295e13f2, type: 3}
-      propertyPath: m_ClearFlags
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7907762245599840150, guid: 1f6a077df07b19e44b181faa295e13f2, type: 3}
-      propertyPath: field of view
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 7907762245599840150, guid: 1f6a077df07b19e44b181faa295e13f2, type: 3}
-      propertyPath: far clip plane
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7907762245599840151, guid: 1f6a077df07b19e44b181faa295e13f2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.78999996
-      objectReference: {fileID: 0}
     - target: {fileID: 7907762246803106617, guid: 1f6a077df07b19e44b181faa295e13f2, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7907762246803106617, guid: 1f6a077df07b19e44b181faa295e13f2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2280,13 +2244,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7907762246803106620, guid: 1f6a077df07b19e44b181faa295e13f2, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7907762246803106621, guid: 1f6a077df07b19e44b181faa295e13f2, type: 3}
-      propertyPath: speed
-      value: 6.5
+    - target: {fileID: 7907762246803106618, guid: 1f6a077df07b19e44b181faa295e13f2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7907762246803106621, guid: 1f6a077df07b19e44b181faa295e13f2, type: 3}
       propertyPath: gameManager
@@ -2595,6 +2555,10 @@ PrefabInstance:
     - target: {fileID: 1704125793960160278, guid: 46992be693eccf74695366cbbe2fc460, type: 3}
       propertyPath: m_Name
       value: Torch (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1704125793960160278, guid: 46992be693eccf74695366cbbe2fc460, type: 3}
+      propertyPath: m_TagString
+      value: FireEffect
       objectReference: {fileID: 0}
     - target: {fileID: 1704125793960259638, guid: 46992be693eccf74695366cbbe2fc460, type: 3}
       propertyPath: m_RootOrder
@@ -3633,7 +3597,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2132673653
 GameObject:
@@ -8620,7 +8584,7 @@ GameObject:
   - component: {fileID: 1704125793998693852}
   m_Layer: 0
   m_Name: Torch (2)
-  m_TagString: Untagged
+  m_TagString: FireEffect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13541,7 +13505,7 @@ GameObject:
   - component: {fileID: 5795170940260552406}
   m_Layer: 0
   m_Name: Torch
-  m_TagString: Untagged
+  m_TagString: FireEffect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13778,6 +13742,10 @@ PrefabInstance:
     - target: {fileID: 1704125793960160278, guid: 46992be693eccf74695366cbbe2fc460, type: 3}
       propertyPath: m_Name
       value: Torch (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1704125793960160278, guid: 46992be693eccf74695366cbbe2fc460, type: 3}
+      propertyPath: m_TagString
+      value: FireEffect
       objectReference: {fileID: 0}
     - target: {fileID: 1704125793960259638, guid: 46992be693eccf74695366cbbe2fc460, type: 3}
       propertyPath: m_RootOrder

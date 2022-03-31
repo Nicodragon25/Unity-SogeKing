@@ -23,8 +23,5 @@ public class HeavyEnemy : EnemyController
             heavyEnemyTimePass += Time.deltaTime;
         }
         if (heavyEnemyTimePass > firstMoveCd) firstMove = true;
-
-        if (canMove) gameObject.GetComponent<Animator>().SetBool("IsMoving", true);
-        if (!canMove) gameObject.GetComponent<Animator>().SetBool("IsMoving", false);
     }
 }

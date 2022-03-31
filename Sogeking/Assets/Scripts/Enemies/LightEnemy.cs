@@ -16,8 +16,9 @@ public class LightEnemy : EnemyController
         if (attacksRemaining <= 0)
         {
             lightCanAttack = false;
-            gameObject.GetComponent<Animator>().SetBool("IsDead", true);
-            Destroy(gameObject, 3f);
+            //gameObject.GetComponent<Animator>().SetBool("IsDead", true);
+            //Destroy(gameObject, 3f);
+            Die();
         }
     }
 }

@@ -6,11 +6,11 @@ public class EnemyController : MonoBehaviour
 {
 
     [SerializeField] protected EnemyData enemyStats;
+    GameManager gameManager;
     public GameObject door;
     public GameObject shootPoint;
     public GameObject damageText;
     Vector3 lookPos;
-
     public LayerMask fortLayer;
     public LayerMask moveLayer;
     RaycastHit hit;
@@ -32,6 +32,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] float RuntimeEnemyHp;
     protected virtual void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         //shootPoint = gameObject.transform.GetChild(0).gameObject;
         shootPoint = gameObject.transform.Find("ShootPoint").gameObject;
         door = GameObject.FindGameObjectWithTag("Door");
@@ -64,7 +65,7 @@ public class EnemyController : MonoBehaviour
     }
     void EnemyMovement()
     {
-        if (canMove)
+        if (canMove && !isDead)
         {
             transform.Translate(Vector3.forward * enemyStats.speed * Time.deltaTime);
         }
@@ -76,7 +77,7 @@ public class EnemyController : MonoBehaviour
     }
     void RayCasting()
     {
-        if (canAttack)
+        if (canAttack && !isDead)
         {
             if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.TransformDirection(Vector3.forward), out hitDoor, enemyStats.rayDistanceDoor, fortLayer))
             {
@@ -94,7 +95,7 @@ public class EnemyController : MonoBehaviour
             moveTimePass = 0;
             canTryMoving = false;
         }
-        if (!Physics.Raycast(shootPoint.transform.position, shootPoint.transform.TransformDirection(Vector3.forward), out hit, enemyStats.rayDistance, moveLayer))
+        if (!Physics.Raycast(shootPoint.transform.position, shootPoint.transform.TransformDirection(Vector3.forward), out hit, enemyStats.rayDistance, moveLayer) && !isDead)
         {
             canTryMoving = true;
             if (moveTimePass > enemyStats.moveCooldown) canMove = true;
@@ -125,8 +126,12 @@ public class EnemyController : MonoBehaviour
     void TakeDamage(float dmg)
     {
         DamageIndicator enemyIndicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
-        enemyIndicator.SetDamageNumber(dmg);
-        gameObject.GetComponent<Animator>().Play("GetHit");
+        if (!isDead)
+        {
+            enemyIndicator.SetDamageNumber(dmg);
+            gameObject.GetComponent<Animator>().Play("GetHit");
+        }
+        
         //enemyIndicator.transform.SetParent(gameObject.transform, true);
         RuntimeEnemyHp -= dmg;
         if (RuntimeEnemyHp <= 0)
@@ -174,14 +179,12 @@ public class EnemyController : MonoBehaviour
     protected virtual void Die()
     {
         gameObject.GetComponent<Animator>().Play("Die");
+        gameManager.ChangeEnemiesLeft(gameManager.actualEnemies - 1);
         Destroy(gameObject, dieTimer);
-
-        isDead = true;
-        canAttack = false;
-        timePass = -1000f;
-        canMove = false;
-        canTryMoving = false;
-        moveTimePass = -1000;
         gameObject.layer = 25;
+        isDead = true;
+
+        canMove = false;
+        canAttack = false;
     }
 }

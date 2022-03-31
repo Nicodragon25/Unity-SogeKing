@@ -8,6 +8,7 @@ public class EnemyGenerator : MonoBehaviour
 
 
     GameObject enemy;
+    GameManager gameManager;
     float minXDistance = -50;
     float maxXDistance = -30;
     float minZDistance = -14;
@@ -25,7 +26,9 @@ public class EnemyGenerator : MonoBehaviour
     bool fastEnemyEliminated = false;
     void Start()
     {
-
+        gameManager = FindObjectOfType<GameManager>();
+        int totalEnemies = maxFastEnemies + maxNormalEnemies + maxStrongEnemies;
+        gameManager.ChangeEnemiesLeft(totalEnemies);
     }
 
     // Update is called once per frame

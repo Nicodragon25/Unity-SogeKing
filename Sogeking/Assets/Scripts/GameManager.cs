@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
     public GameObject door;
     public GameObject player;
 
@@ -12,8 +14,10 @@ public class GameManager : MonoBehaviour
     public Slider doorHpBar;
     public Slider powerBar;
     public Slider mouseSensitivity;
-
+    public TextMeshProUGUI enemiesText;
     bool isPaused;
+
+    public int actualEnemies;
     void Start()
     {
         powerBar.gameObject.SetActive(false);
@@ -56,5 +60,12 @@ public class GameManager : MonoBehaviour
     public void ChargePower(float power)
     {
         powerBar.value = power;
+    }
+
+
+    public void ChangeEnemiesLeft(int enemies)
+    {
+        actualEnemies = enemies;
+        enemiesText.text = "Enemies Left: " + enemies.ToString();
     }
 }

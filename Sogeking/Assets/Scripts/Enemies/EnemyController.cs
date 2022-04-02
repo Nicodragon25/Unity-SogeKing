@@ -147,7 +147,7 @@ public class EnemyController : MonoBehaviour
         {
             if(hitTimePass > getHitCoolDown && !isDead)
             {
-                
+                gameManager.HitMarker();
                 if (name == "head")
                 {
                     if (other.gameObject.CompareTag("Fire"))

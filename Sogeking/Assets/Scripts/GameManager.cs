@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public Slider powerBar;
     public Slider mouseSensitivity;
     public TextMeshProUGUI enemiesText;
+    public GameObject HitmarkerGO;
     bool isPaused;
 
     public int actualEnemies;
@@ -67,5 +68,19 @@ public class GameManager : MonoBehaviour
     {
         actualEnemies = enemies;
         enemiesText.text = "Enemies Left: " + enemies.ToString();
+    }
+
+
+    IEnumerator hitmarkerDuration()
+    {
+        yield return new WaitForSeconds(0.5f);
+        HitmarkerGO.SetActive(false);
+
+    }
+    public void HitMarker()
+    {
+        HitmarkerGO.SetActive(true);
+        HitmarkerGO.GetComponent<Animator>().Play("Hit");
+        StartCoroutine(hitmarkerDuration());
     }
 }

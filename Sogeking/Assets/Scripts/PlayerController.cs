@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    public GameObject gameManager;
     public GameObject arrowGenerator;
     public GameObject arrow;
     public GameObject playerViewPoint;
@@ -48,8 +47,8 @@ public class PlayerController : MonoBehaviour
             loadedArrow = true;
             canArrowSpawn = false;
             finalArrowSpeed = minArrowSpeed;
-            gameManager.GetComponent<GameManager>().powerBar.gameObject.SetActive(true);
-            gameManager.GetComponent<GameManager>().powerBar.value = minArrowSpeed;
+            GameManager.Instance.powerBar.gameObject.SetActive(true);
+            GameManager.Instance.powerBar.value = minArrowSpeed;
         }
         if (Input.GetMouseButtonUp(1))
         {
@@ -58,7 +57,7 @@ public class PlayerController : MonoBehaviour
             if (loadedArrow)
             {
                 arrowGenerator.GetComponent<ArrowGenerator>().arrow.GetComponent<ArrowController>().loadedArrowDestroy();
-                gameManager.GetComponent<GameManager>().powerBar.gameObject.SetActive(false);
+                GameManager.Instance.powerBar.gameObject.SetActive(false);
             }
         }
 
@@ -73,8 +72,8 @@ public class PlayerController : MonoBehaviour
                 loadedArrow = true;
                 canArrowSpawn = false;
                 finalArrowSpeed = minArrowSpeed;
-                gameManager.GetComponent<GameManager>().powerBar.gameObject.SetActive(true);
-                gameManager.GetComponent<GameManager>().powerBar.value = minArrowSpeed;
+                GameManager.Instance.powerBar.gameObject.SetActive(true);
+                GameManager.Instance.powerBar.value = minArrowSpeed;
                 bow.GetComponent<Animator>().SetBool("HasShot", false);
             }
 
@@ -94,7 +93,7 @@ public class PlayerController : MonoBehaviour
                 {
                     finalArrowSpeed = maxArrowSpeed;
                 }
-                gameManager.GetComponent<GameManager>().ChargePower(finalArrowSpeed);
+                GameManager.Instance.ChargePower(finalArrowSpeed);
 
                 bow.GetComponent<Animator>().Play("Draw");
                 arrow.GetComponent<Animator>().Play("ArrowDraw");
@@ -138,7 +137,7 @@ public class PlayerController : MonoBehaviour
     void Shoot(float ShotSpeed)
     {
         arrowGenerator.GetComponent<ArrowGenerator>().arrowShot(ShotSpeed, Mathf.Ceil(finalArrowSpeed / 4));
-        gameManager.GetComponent<GameManager>().powerBar.gameObject.SetActive(false);
+        GameManager.Instance.powerBar.gameObject.SetActive(false);
     }
     void ArrowSwitch(string arrowType)
     {

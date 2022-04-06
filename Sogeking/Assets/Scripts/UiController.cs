@@ -16,21 +16,25 @@ public class UiController : MonoBehaviour
     }
     public void CreditsButton()
     {
-        creditsPanel.SetActive(true);
+        if (creditsPanel.activeInHierarchy == true) creditsPanel.SetActive(false);
+        else if (creditsPanel.activeInHierarchy == false) creditsPanel.SetActive(true);
     }
     public void QuitButton()
     {
         Application.Quit();
     }
+    public void ApplyButton()
+    {
+        GameManager.Instance.ApplyChanges();
+    }
+
     public void OptionsSwitch()
     {
-        if (optionsPanel.activeInHierarchy == false)
+        if (optionsPanel.activeInHierarchy == false) optionsPanel.SetActive(true);
+        else if (optionsPanel.activeInHierarchy == true) optionsPanel.SetActive(false);
+        if (Time.timeScale == 0)
         {
-            optionsPanel.SetActive(true);
-        }
-        if(optionsPanel.activeInHierarchy == true)
-        {
-            optionsPanel.SetActive(false);
+            GameManager.Instance.PauseToggle();
         }
     }
 }

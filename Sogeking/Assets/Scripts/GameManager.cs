@@ -11,11 +11,13 @@ public class GameManager : MonoBehaviour
     public GameObject door;
     public GameObject player;
 
-    
+
+    public int xd = 0;
     int doorHp;
     public Slider doorHpBar;
     public Slider powerBar;
     public Slider mouseSensitivity;
+    [SerializeField] float mouseSensitivityFloat;
     public TextMeshProUGUI enemiesText;
     public GameObject HitmarkerGO;
 
@@ -27,30 +29,47 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else Destroy(gameObject);
+        else
+        {
+            Instance.doorHpBar = doorHpBar;
+            Instance.powerBar = powerBar;
+            Instance.mouseSensitivity = mouseSensitivity;
+            //Instance.player = player;
+            Instance.door = door;
+            Instance.enemiesText = enemiesText;
+            Instance.HitmarkerGO = HitmarkerGO;
+            Destroy(gameObject);
+        }
 
         uiController = gameObject.GetComponent<UiController>();
+        if (FindObjectOfType<MouseLook>() != null) FindObjectOfType<MouseLook>().mouseSensitivity = Instance.mouseSensitivityFloat;
+
+        Instance.powerBar.minValue = player.GetComponent<PlayerController>().minArrowSpeed - 10;
+        Instance.powerBar.maxValue = player.GetComponent<PlayerController>().maxArrowSpeed;
+
+        doorHp = door.GetComponent<DoorController>().doorHP;
+        Instance.doorHpBar.maxValue = doorHp;
+        Instance.doorHpBar.value = doorHp;
     }
     void Start()
     {
         Time.timeScale = 1;
         powerBar.gameObject.SetActive(false);
-        doorHp = door.GetComponent<DoorController>().doorHP;
-        doorHpBar.maxValue = doorHp;
-        doorHpBar.value = doorHp;
-
-        powerBar.minValue = player.GetComponent<PlayerController>().minArrowSpeed - 10;
-        powerBar.maxValue = player.GetComponent<PlayerController>().maxArrowSpeed;
+        //powerBar.minValue = player.GetComponent<PlayerController>().minArrowSpeed - 10;
+        //powerBar.maxValue = player.GetComponent<PlayerController>().maxArrowSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (doorHp != 0)
+        {
             doorHpBar.value = door.GetComponent<DoorController>().doorHP;
-            if (Input.GetKeyDown(KeyCode.P))
-            {
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
             PauseToggle();
-            }
+        }
     }
     public void PauseToggle()
     {
@@ -72,9 +91,17 @@ public class GameManager : MonoBehaviour
         powerBar.value = power;
     }
 
-    void ApplyChanges()
+    public void ApplyChanges()
     {
-        Camera.main.GetComponent<MouseLook>().mouseSensitivity = mouseSensitivity.value;
+        if (FindObjectOfType<MouseLook>() != null)
+        {
+            mouseSensitivity = GameObject.Find("Sensitivity").GetComponent<Slider>();
+            FindObjectOfType<MouseLook>().mouseSensitivity = mouseSensitivity.value;
+        }
+        else if (FindObjectOfType<MouseLook>() == null)
+        {
+            mouseSensitivityFloat = mouseSensitivity.value;
+        }
     }
 
     public void ChangeEnemiesLeft(int enemies)
@@ -96,7 +123,7 @@ public class GameManager : MonoBehaviour
         HitmarkerGO.GetComponent<Animator>().Play("Hit");
         StartCoroutine(hitmarkerDuration());
     }
-    
+
     public void NextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

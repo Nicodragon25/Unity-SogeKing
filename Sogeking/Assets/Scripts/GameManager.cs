@@ -1,26 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    [SerializeField] UiController uiController;
     public GameObject door;
     public GameObject player;
 
-    public GameObject pausePanel;
+    
     int doorHp;
     public Slider doorHpBar;
     public Slider powerBar;
     public Slider mouseSensitivity;
     public TextMeshProUGUI enemiesText;
     public GameObject HitmarkerGO;
-    bool isPaused;
 
     public int actualEnemies;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else Destroy(gameObject);
+
+        uiController = gameObject.GetComponent<UiController>();
+    }
     void Start()
     {
+        Time.timeScale = 1;
         powerBar.gameObject.SetActive(false);
         doorHp = door.GetComponent<DoorController>().doorHP;
         doorHpBar.maxValue = doorHp;
@@ -33,36 +46,36 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       doorHpBar.value = door.GetComponent<DoorController>().doorHP;
-        Camera.main.GetComponent<MouseLook>().mouseSensitivity = mouseSensitivity.value;
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if(!isPaused)
+            doorHpBar.value = door.GetComponent<DoorController>().doorHP;
+            if (Input.GetKeyDown(KeyCode.P))
             {
-                Time.timeScale = 0;
-                pausePanel.SetActive(true);
-                Cursor.lockState = CursorLockMode.Confined;
-                isPaused = true;
+            PauseToggle();
             }
-            if (isPaused)
-            {
-                Unpause();
-            }
-            
-        }
-        if (Time.timeScale == 1) isPaused = false;
     }
-    public void Unpause()
+    public void PauseToggle()
     {
-        Time.timeScale = 1;
-        pausePanel.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
+        if (Time.timeScale == 0)
+        {
+            Time.timeScale = 1;
+            uiController.optionsPanel.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else if (Time.timeScale == 1)
+        {
+            uiController.optionsPanel.SetActive(true);
+            Cursor.lockState = CursorLockMode.Confined;
+            Time.timeScale = 0;
+        }
     }
     public void ChargePower(float power)
     {
         powerBar.value = power;
     }
 
+    void ApplyChanges()
+    {
+        Camera.main.GetComponent<MouseLook>().mouseSensitivity = mouseSensitivity.value;
+    }
 
     public void ChangeEnemiesLeft(int enemies)
     {
@@ -82,5 +95,19 @@ public class GameManager : MonoBehaviour
         HitmarkerGO.SetActive(true);
         HitmarkerGO.GetComponent<Animator>().Play("Hit");
         StartCoroutine(hitmarkerDuration());
+    }
+    
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void ChargeLevel(int levelIndex)
+    {
+        SceneManager.LoadScene(levelIndex);
+    }
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

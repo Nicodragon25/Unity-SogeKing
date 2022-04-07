@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
         Instance.powerBar.minValue = player.GetComponent<PlayerController>().minArrowSpeed - 10;
         Instance.powerBar.maxValue = player.GetComponent<PlayerController>().maxArrowSpeed;
 
-        doorHp = door.GetComponent<DoorController>().doorHP;
+        if(door.GetComponent<DoorController>()) doorHp = door.GetComponent<DoorController>().doorHP;
         Instance.doorHpBar.maxValue = doorHp;
         Instance.doorHpBar.value = doorHp;
     }
@@ -55,8 +55,6 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         powerBar.gameObject.SetActive(false);
-        //powerBar.minValue = player.GetComponent<PlayerController>().minArrowSpeed - 10;
-        //powerBar.maxValue = player.GetComponent<PlayerController>().maxArrowSpeed;
     }
 
     // Update is called once per frame

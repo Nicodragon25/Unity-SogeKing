@@ -8,17 +8,18 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     [SerializeField] UiController uiController;
+    public ScoreController scoreController;
     public GameObject door;
     public GameObject player;
 
 
-    public int xd = 0;
+
+    public int highScore;
     int doorHp;
     public Slider doorHpBar;
     public Slider powerBar;
     public Slider mouseSensitivity;
     [SerializeField] float mouseSensitivityFloat;
-    public TextMeshProUGUI enemiesText;
     public GameObject HitmarkerGO;
 
     public int actualEnemies;
@@ -36,12 +37,13 @@ public class GameManager : MonoBehaviour
             Instance.mouseSensitivity = mouseSensitivity;
             //Instance.player = player;
             Instance.door = door;
-            Instance.enemiesText = enemiesText;
             Instance.HitmarkerGO = HitmarkerGO;
             Destroy(gameObject);
         }
 
+        scoreController = gameObject.GetComponent<ScoreController>();
         uiController = gameObject.GetComponent<UiController>();
+        FindObjectOfType<DoorController>().OnDoorBreak += GameOver;
         if (FindObjectOfType<MouseLook>() != null) FindObjectOfType<MouseLook>().mouseSensitivity = Instance.mouseSensitivityFloat;
 
         Instance.powerBar.minValue = player.GetComponent<PlayerController>().minArrowSpeed - 10;
@@ -102,12 +104,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ChangeEnemiesLeft(int enemies)
-    {
-        actualEnemies = enemies;
-        enemiesText.text = "Enemies Left: " + enemies.ToString();
-    }
-
 
     IEnumerator hitmarkerDuration()
     {
@@ -134,5 +130,16 @@ public class GameManager : MonoBehaviour
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    void GameOver()
+    {
+        if(scoreController.actualScore > highScore)
+        {
+            highScore = scoreController.actualScore;
+        }
+        uiController.gameOverPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Score : " + highScore;
+        uiController.GameOverPanel();
+        Time.timeScale = 0;
     }
 }

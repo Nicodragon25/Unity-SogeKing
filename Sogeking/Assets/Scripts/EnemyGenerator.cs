@@ -28,7 +28,6 @@ public class EnemyGenerator : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         int totalEnemies = maxFastEnemies + maxNormalEnemies + maxStrongEnemies;
-        gameManager.ChangeEnemiesLeft(totalEnemies);
     }
 
     // Update is called once per frame

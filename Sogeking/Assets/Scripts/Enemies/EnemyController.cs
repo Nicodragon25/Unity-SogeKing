@@ -179,7 +179,7 @@ public class EnemyController : MonoBehaviour
     protected virtual void Die()
     {
         gameObject.GetComponent<Animator>().Play("Die");
-        gameManager.ChangeEnemiesLeft(gameManager.actualEnemies - 1);
+        GameManager.Instance.scoreController.AddScore(enemyStats.enemyHp);
         Destroy(gameObject, dieTimer);
         gameObject.layer = 25;
         isDead = true;

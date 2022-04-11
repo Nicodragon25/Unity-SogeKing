@@ -140,6 +140,8 @@ public class GameManager : MonoBehaviour
         }
         uiController.gameOverPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Score : " + highScore;
         uiController.GameOverPanel();
+        Cursor.lockState = CursorLockMode.Confined;
+
         Time.timeScale = 0;
     }
 }

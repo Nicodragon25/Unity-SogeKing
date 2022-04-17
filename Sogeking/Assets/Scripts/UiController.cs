@@ -7,6 +7,8 @@ public class UiController : MonoBehaviour
     public GameObject optionsPanel;
     public GameObject creditsPanel;
     public GameObject gameOverPanel;
+
+    
     public void PlayButton()
     {
         GameManager.Instance.NextLevel();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 using TMPro;
 public class GameManager : MonoBehaviour
 {
@@ -18,8 +19,7 @@ public class GameManager : MonoBehaviour
     int doorHp;
     public Slider doorHpBar;
     public Slider powerBar;
-    public Slider mouseSensitivity;
-    [SerializeField] float mouseSensitivityFloat;
+    public Slider mouseSensitivitySlider;
     public GameObject HitmarkerGO;
 
     public int actualEnemies;
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         {
             Instance.doorHpBar = doorHpBar;
             Instance.powerBar = powerBar;
-            Instance.mouseSensitivity = mouseSensitivity;
+            Instance.mouseSensitivitySlider = mouseSensitivitySlider;
             //Instance.player = player;
             Instance.door = door;
             Instance.HitmarkerGO = HitmarkerGO;
@@ -43,8 +43,9 @@ public class GameManager : MonoBehaviour
 
         scoreController = gameObject.GetComponent<ScoreController>();
         uiController = gameObject.GetComponent<UiController>();
+        Instance.uiController.gameOverPanel = uiController.gameOverPanel;
+        Instance.uiController.optionsPanel = uiController.optionsPanel;
         FindObjectOfType<DoorController>().OnDoorBreak += GameOver;
-        if (FindObjectOfType<MouseLook>() != null) FindObjectOfType<MouseLook>().mouseSensitivity = Instance.mouseSensitivityFloat;
 
         Instance.powerBar.minValue = player.GetComponent<PlayerController>().minArrowSpeed - 10;
         Instance.powerBar.maxValue = player.GetComponent<PlayerController>().maxArrowSpeed;
@@ -57,6 +58,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         powerBar.gameObject.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -93,15 +95,7 @@ public class GameManager : MonoBehaviour
 
     public void ApplyChanges()
     {
-        if (FindObjectOfType<MouseLook>() != null)
-        {
-            mouseSensitivity = GameObject.Find("Sensitivity").GetComponent<Slider>();
-            FindObjectOfType<MouseLook>().mouseSensitivity = mouseSensitivity.value;
-        }
-        else if (FindObjectOfType<MouseLook>() == null)
-        {
-            mouseSensitivityFloat = mouseSensitivity.value;
-        }
+        OnApplyButton();
     }
 
 
@@ -130,6 +124,8 @@ public class GameManager : MonoBehaviour
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void GameOver()
@@ -137,11 +133,14 @@ public class GameManager : MonoBehaviour
         if(scoreController.actualScore > highScore)
         {
             highScore = scoreController.actualScore;
+            PlayerPrefs.SetInt("HighScore", highScore);
         }
-        uiController.gameOverPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Score : " + highScore;
+        scoreController.actualScore = 0;
+        uiController.gameOverPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "High Score : " + PlayerPrefs.GetInt("HighScore").ToString();
         uiController.GameOverPanel();
         Cursor.lockState = CursorLockMode.Confined;
 
         Time.timeScale = 0;
     }
+    public event Action OnApplyButton;
 }

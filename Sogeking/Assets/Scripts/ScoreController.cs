@@ -8,17 +8,14 @@ public class ScoreController : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
     public int actualScore = 0;
-    private void Awake()
+   
+    public void AddScore(int points)
     {
         if (GameObject.Find("ScoreTxt") != null)
         {
             scoreText = GameObject.Find("ScoreTxt").GetComponent<TextMeshProUGUI>();
             scoreText.text = "Score : " + actualScore;
         }
-    }
-
-    public void AddScore(int points)
-    {
         actualScore += points;
         scoreText.text = "Score : " + actualScore.ToString();
     }

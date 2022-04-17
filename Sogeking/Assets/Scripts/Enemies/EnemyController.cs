@@ -15,6 +15,8 @@ public class EnemyController : MonoBehaviour
     public LayerMask moveLayer;
     RaycastHit hit;
     RaycastHit hitDoor;
+    public AudioSource WalkAudioSource;
+    public AudioSource AttackAudioSource;
     Vector3 offset = new Vector3(0, 0.1f, 0);
 
 
@@ -68,10 +70,12 @@ public class EnemyController : MonoBehaviour
         if (canMove && !isDead)
         {
             transform.Translate(Vector3.forward * enemyStats.speed * Time.deltaTime);
+            if(!WalkAudioSource.isPlaying) WalkAudioSource.Play();
         }
         if (!canMove)
         {
             transform.Translate(Vector3.forward * 0 * Time.deltaTime);
+            WalkAudioSource.Stop();
         }
 
     }
@@ -122,6 +126,7 @@ public class EnemyController : MonoBehaviour
     {
         door.GetComponent<DoorController>().TakeDamage(enemyStats.enemyDamage);
         gameObject.GetComponent<Animator>().Play("Attack");
+        AttackAudioSource.Play();
     }
     void TakeDamage(float dmg)
     {

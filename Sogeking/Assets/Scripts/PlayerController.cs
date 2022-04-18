@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class PlayerController : MonoBehaviour
 {
 
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     public float arrowSCD;
     bool canArrowSpawn;
     public bool canArrowShoot;
-
+    bool isAudioPlaying = false;
     void Start()
     {
         camera = Camera.main.gameObject;
@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
                 canArrowSpawn = true;
                 timePassSpawn = 0;
             }
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && loadedArrow)
             {
                 if (finalArrowSpeed < maxArrowSpeed) finalArrowSpeed += Time.deltaTime * arrowSpeed;
                 if (finalArrowSpeed >= maxArrowSpeed)
@@ -95,6 +95,11 @@ public class PlayerController : MonoBehaviour
                 }
                 GameManager.Instance.ChargePower(finalArrowSpeed);
 
+                if (!isAudioPlaying)
+                {
+                    FindObjectOfType<BowSound>().DrawAudio();
+                    isAudioPlaying = true;
+                }
                 bow.GetComponent<Animator>().Play("Draw");
                 arrow.GetComponent<Animator>().Play("ArrowDraw");
             }
@@ -103,6 +108,11 @@ public class PlayerController : MonoBehaviour
                 //shotTimePass = Time.time - lmbDownTime;
                 //if (shotTimePass <= 2) finalArrowSpeed = arrowSpeed * shotTimePass;
                 //if (shotTimePass > 2) finalArrowSpeed = arrowSpeed * 2;
+
+                FindObjectOfType<BowSound>().StopAudioClip();
+                arrow.transform.GetChild(1).GetComponent<AudioSource>().Play();
+                isAudioPlaying = false;
+                FindObjectOfType<BowSound>().ShotAudio();
 
                 arrow.GetComponent<Animator>().enabled = false;
                 Shoot(finalArrowSpeed);

@@ -13,4 +13,13 @@ public class ButtonScript : MonoBehaviour
     {
         GameManager.Instance.PauseToggle();
     }
+
+    public void RestartButton()
+    {
+        GameManager.Instance.RestartLevel();
+    }
+    public void MainMenuButton()
+    {
+        GameManager.Instance.LoadLevel(0);
+    }
 }

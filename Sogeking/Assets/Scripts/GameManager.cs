@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public AudioMixer audioMixer;
 
-    public int highScore;
     int doorHp;
     public Slider doorHpBar;
     public Slider powerBar;
@@ -128,7 +127,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    public void ChargeLevel(int levelIndex)
+    public void LoadLevel(int levelIndex)
     {
         SceneManager.LoadScene(levelIndex);
     }
@@ -141,12 +140,6 @@ public class GameManager : MonoBehaviour
 
     void GameOver()
     {
-        if (scoreController.actualScore > highScore)
-        {
-            highScore = scoreController.actualScore;
-            PlayerPrefs.SetInt("HighScore", highScore);
-        }
-        scoreController.actualScore = 0;
         uiController.gameOverPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "High Score : " + PlayerPrefs.GetInt("HighScore").ToString();
         uiController.GameOverPanel();
         Cursor.lockState = CursorLockMode.Confined;

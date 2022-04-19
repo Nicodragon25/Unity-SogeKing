@@ -943,7 +943,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 265675125}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aecd0aff288a4274bac2e27aba3bb7ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 82675a963a61e7942b16023bfa9a49ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: f13793de78b636a469e13988630d0d4c, type: 2}
@@ -1143,6 +1143,7 @@ GameObject:
   - component: {fileID: 314144128}
   - component: {fileID: 314144130}
   - component: {fileID: 314144129}
+  - component: {fileID: 314144131}
   m_Layer: 5
   m_Name: Restart
   m_TagString: Untagged
@@ -1214,9 +1215,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 550237916}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: RestartLevel
+      - m_Target: {fileID: 314144131}
+        m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
+        m_MethodName: RestartButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1234,6 +1235,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 314144127}
   m_CullTransparentMesh: 1
+--- !u!114 &314144131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314144127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45568bdcbaa25045ae9dec3203b7f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &371330476
 GameObject:
   m_ObjectHideFlags: 0
@@ -1550,6 +1563,7 @@ GameObject:
   - component: {fileID: 419656320}
   - component: {fileID: 419656322}
   - component: {fileID: 419656321}
+  - component: {fileID: 419656323}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -1621,9 +1635,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UiController, Assembly-CSharp
-        m_MethodName: ApplyButton
+      - m_Target: {fileID: 419656323}
+        m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
+        m_MethodName: MainMenuButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1641,6 +1655,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 419656319}
   m_CullTransparentMesh: 1
+--- !u!114 &419656323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419656319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45568bdcbaa25045ae9dec3203b7f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &439882942
 GameObject:
   m_ObjectHideFlags: 0
@@ -1947,10 +1973,8 @@ MonoBehaviour:
   door: {fileID: 1348369284}
   player: {fileID: 1556455212}
   audioMixer: {fileID: 24100000, guid: f13793de78b636a469e13988630d0d4c, type: 2}
-  highScore: 0
   doorHpBar: {fileID: 783911816}
   powerBar: {fileID: 2132673655}
-  mouseSensitivitySlider: {fileID: 1858122220}
   HitmarkerGO: {fileID: 1582712982}
   actualEnemies: 0
 --- !u!4 &550237917
@@ -2172,10 +2196,57 @@ MonoBehaviour:
   m_GameObject: {fileID: 599450053}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aecd0aff288a4274bac2e27aba3bb7ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 82675a963a61e7942b16023bfa9a49ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: f13793de78b636a469e13988630d0d4c, type: 2}
+--- !u!1 &607732987
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 607732989}
+  - component: {fileID: 607732988}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &607732988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607732987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd00d014526132d44aaf1d0b667c75b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MasterSlider: {fileID: 265675127}
+  MusicSlider: {fileID: 937453255}
+  SFXSlider: {fileID: 599450055}
+  audioMixer: {fileID: 24100000, guid: f13793de78b636a469e13988630d0d4c, type: 2}
+--- !u!4 &607732989
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607732987}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &653179148
 GameObject:
   m_ObjectHideFlags: 0
@@ -3160,7 +3231,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 937453253}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aecd0aff288a4274bac2e27aba3bb7ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 82675a963a61e7942b16023bfa9a49ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: f13793de78b636a469e13988630d0d4c, type: 2}
@@ -5159,6 +5230,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1520603116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1520603118}
+  - component: {fileID: 1520603117}
+  m_Layer: 0
+  m_Name: MouseSensitivityManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1520603117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520603116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61d105eba83cfc44a58b6cae42163ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MouseSensiSlider: {fileID: 1858122220}
+--- !u!4 &1520603118
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520603116}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1546989887
 GameObject:
   m_ObjectHideFlags: 0
@@ -5261,7 +5376,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1572633413
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6262,7 +6377,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1858122219}
   - component: {fileID: 1858122220}
-  - component: {fileID: 1858122221}
   m_Layer: 5
   m_Name: Sensitivity
   m_TagString: Untagged
@@ -6344,18 +6458,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1858122221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1858122218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c61d105eba83cfc44a58b6cae42163ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1878984254
 GameObject:
   m_ObjectHideFlags: 0

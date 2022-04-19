@@ -8,7 +8,7 @@ public class ScoreController : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
     public int actualScore = 0;
-   
+
     public void AddScore(int points)
     {
         if (GameObject.Find("ScoreTxt") != null)
@@ -18,5 +18,9 @@ public class ScoreController : MonoBehaviour
         }
         actualScore += points;
         scoreText.text = "Score : " + actualScore.ToString();
+        if (actualScore >= PlayerPrefs.GetInt("HighScore"))
+        {
+            PlayerPrefs.SetInt("HighScore", actualScore);
+        }
     }
 }

@@ -248,8 +248,14 @@ Transform:
   m_Children:
   - {fileID: 1266147100}
   - {fileID: 1124235056}
+  - {fileID: 920854212}
   - {fileID: 415030382}
   - {fileID: 1082691678}
+  - {fileID: 740603332}
+  - {fileID: 81799126}
+  - {fileID: 1684637312}
+  - {fileID: 784194415}
+  - {fileID: 1990607000}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -346,6 +352,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &81799125
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 81799126}
+  - component: {fileID: 81799127}
+  m_Layer: 26
+  m_Name: FloorCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &81799126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81799125}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.24, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 7.2911, z: 38.127}
+  m_Children: []
+  m_Father: {fileID: 16162234}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &81799127
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81799125}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.6247296, y: 0.8465487, z: 1}
+  m_Center: {x: 0.4000585, y: -0.07672834, z: 0}
 --- !u!1 &94974221
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,8 +711,8 @@ RectTransform:
   m_Father: {fileID: 847069262}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.495, y: 0}
-  m_AnchorMax: {x: 0.495, y: 1}
+  m_AnchorMin: {x: 0.49995, y: 0}
+  m_AnchorMax: {x: 0.49995, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -737,7 +787,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.495, y: 1}
+  m_AnchorMax: {x: 0.49995, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -789,6 +839,7 @@ GameObject:
   m_Component:
   - component: {fileID: 265675126}
   - component: {fileID: 265675127}
+  - component: {fileID: 265675128}
   m_Layer: 5
   m_Name: Master Volume
   m_TagString: Untagged
@@ -863,13 +914,26 @@ MonoBehaviour:
   m_FillRect: {fileID: 306437105}
   m_HandleRect: {fileID: 212806701}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 200
-  m_WholeNumbers: 1
-  m_Value: 99
+  m_MinValue: 0.0001
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &265675128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265675125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aecd0aff288a4274bac2e27aba3bb7ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: f13793de78b636a469e13988630d0d4c, type: 2}
 --- !u!1 &268892153
 GameObject:
   m_ObjectHideFlags: 0
@@ -1011,7 +1075,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.495, y: 1}
+  m_AnchorMax: {x: 0.49995, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1425,7 +1489,7 @@ GameObject:
   - component: {fileID: 415030382}
   - component: {fileID: 415030383}
   m_Layer: 26
-  m_Name: FortressR Limit
+  m_Name: FortressL Limit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1445,7 +1509,7 @@ Transform:
   - {fileID: 1151419880}
   - {fileID: 1257206512}
   m_Father: {fileID: 16162234}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &415030383
 BoxCollider:
@@ -1867,6 +1931,7 @@ MonoBehaviour:
   scoreController: {fileID: 0}
   door: {fileID: 1348369284}
   player: {fileID: 1556455212}
+  audioMixer: {fileID: 24100000, guid: f13793de78b636a469e13988630d0d4c, type: 2}
   highScore: 0
   doorHpBar: {fileID: 783911816}
   powerBar: {fileID: 2132673655}
@@ -1948,8 +2013,8 @@ RectTransform:
   m_Father: {fileID: 2022799910}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.495, y: 0}
-  m_AnchorMax: {x: 0.495, y: 1}
+  m_AnchorMin: {x: 0.49995, y: 0}
+  m_AnchorMax: {x: 0.49995, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2001,6 +2066,7 @@ GameObject:
   m_Component:
   - component: {fileID: 599450054}
   - component: {fileID: 599450055}
+  - component: {fileID: 599450056}
   m_Layer: 5
   m_Name: SFX Volume
   m_TagString: Untagged
@@ -2075,13 +2141,26 @@ MonoBehaviour:
   m_FillRect: {fileID: 941253350}
   m_HandleRect: {fileID: 1966962155}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 200
-  m_WholeNumbers: 1
-  m_Value: 99
+  m_MinValue: 0.0001
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &599450056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599450053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aecd0aff288a4274bac2e27aba3bb7ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: f13793de78b636a469e13988630d0d4c, type: 2}
 --- !u!1 &653179148
 GameObject:
   m_ObjectHideFlags: 0
@@ -2245,7 +2324,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -7230344500497078342, guid: f13793de78b636a469e13988630d0d4c, type: 2}
   m_audioClip: {fileID: 8300000, guid: 6ae4e594a1ee3426a9c513a001e5668d, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.2
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2436,6 +2515,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 136.9, y: -56.4, z: 0}
+--- !u!1 &740603331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 740603332}
+  - component: {fileID: 740603333}
+  m_Layer: 26
+  m_Name: FortressBackLimit (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &740603332
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740603331}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.58, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 7.2911, z: 38.127}
+  m_Children: []
+  m_Father: {fileID: 16162234}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &740603333
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740603331}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.03, y: 1, z: 0.86926395}
+  m_Center: {x: 0, y: 0, z: 0.0025502353}
 --- !u!1 &754221883
 GameObject:
   m_ObjectHideFlags: 0
@@ -2756,6 +2879,50 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &784194414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 784194415}
+  - component: {fileID: 784194416}
+  m_Layer: 26
+  m_Name: FloorColliderL
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &784194415
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784194414}
+  m_LocalRotation: {x: 0, y: 0.025531394, z: 0, w: 0.999674}
+  m_LocalPosition: {x: -1.05, y: 0.5, z: -35.77}
+  m_LocalScale: {x: 1, y: 7.2911, z: 38.127}
+  m_Children: []
+  m_Father: {fileID: 16162234}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 2.926, z: 0}
+--- !u!65 &784194416
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784194414}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11.717461, y: 0.8465488, z: 0.06734205}
+  m_Center: {x: -6.753732, y: -0.07672834, z: 0.47160077}
 --- !u!1 &847069261
 GameObject:
   m_ObjectHideFlags: 0
@@ -2833,6 +3000,50 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &920854211
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 920854212}
+  - component: {fileID: 920854213}
+  m_Layer: 26
+  m_Name: 'FortressR inner Limit Angled '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &920854212
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920854211}
+  m_LocalRotation: {x: -0, y: -0.024432095, z: -0, w: 0.9997015}
+  m_LocalPosition: {x: -7.4491987, y: 1, z: 15.85}
+  m_LocalScale: {x: 12.041148, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 16162234}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: -2.8, z: 0}
+--- !u!65 &920854213
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920854211}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 5.543698, z: 1}
+  m_Center: {x: 0, y: 2.2718484, z: 0}
 --- !u!1 &937453253
 GameObject:
   m_ObjectHideFlags: 0
@@ -2843,6 +3054,7 @@ GameObject:
   m_Component:
   - component: {fileID: 937453254}
   - component: {fileID: 937453255}
+  - component: {fileID: 937453256}
   m_Layer: 5
   m_Name: Music Volume
   m_TagString: Untagged
@@ -2917,13 +3129,26 @@ MonoBehaviour:
   m_FillRect: {fileID: 253450664}
   m_HandleRect: {fileID: 555464664}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 200
-  m_WholeNumbers: 1
-  m_Value: 99
+  m_MinValue: 0.0001
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &937453256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937453253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aecd0aff288a4274bac2e27aba3bb7ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: f13793de78b636a469e13988630d0d4c, type: 2}
 --- !u!1 &941253349
 GameObject:
   m_ObjectHideFlags: 0
@@ -2957,7 +3182,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.495, y: 1}
+  m_AnchorMax: {x: 0.49995, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3309,7 +3534,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 16162234}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!65 &1082691679
 BoxCollider:
@@ -3585,7 +3810,7 @@ GameObject:
   - component: {fileID: 1124235056}
   - component: {fileID: 1124235057}
   m_Layer: 26
-  m_Name: FortressL Limit
+  m_Name: FortressR Limit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5241,6 +5466,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1596674982}
   m_CullTransparentMesh: 1
+--- !u!1 &1684637311
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1684637312}
+  - component: {fileID: 1684637313}
+  m_Layer: 26
+  m_Name: FloorColliderR
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1684637312
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684637311}
+  m_LocalRotation: {x: -0, y: -0.025527656, z: -0, w: 0.99967414}
+  m_LocalPosition: {x: 0.6696787, y: 0.5, z: -0.044740677}
+  m_LocalScale: {x: 1, y: 7.2911, z: 38.127}
+  m_Children: []
+  m_Father: {fileID: 16162234}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: -2.926, z: 0}
+--- !u!65 &1684637313
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684637311}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11.717461, y: 0.8465488, z: 0.06734205}
+  m_Center: {x: -6.753732, y: -0.07672834, z: 0.47160077}
 --- !u!1001 &1736826648
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5687,6 +5956,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4992132457178378620, guid: 90b2ec07807805c45809e9c77d382f38, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4992132457178378620, guid: 90b2ec07807805c45809e9c77d382f38, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4051908728737653931, guid: 90b2ec07807805c45809e9c77d382f38, type: 3}
       propertyPath: m_Layer
       value: 27
@@ -5735,7 +6012,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d174c27708a001545a1e20d1d8e35c19, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9166983126282769173, guid: 90b2ec07807805c45809e9c77d382f38, type: 3}
+    - {fileID: -4992132457178378620, guid: 90b2ec07807805c45809e9c77d382f38, type: 3}
+    - {fileID: 5837598538811440611, guid: 90b2ec07807805c45809e9c77d382f38, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 90b2ec07807805c45809e9c77d382f38, type: 3}
 --- !u!1 &1821180316
 GameObject:
@@ -6106,7 +6386,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -2234864869921182826, guid: f13793de78b636a469e13988630d0d4c, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.5
   m_Pitch: 1.4
   Loop: 0
   Mute: 0
@@ -6297,8 +6577,8 @@ RectTransform:
   m_Father: {fileID: 1079837798}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.495, y: 0}
-  m_AnchorMax: {x: 0.495, y: 1}
+  m_AnchorMin: {x: 0.49995, y: 0}
+  m_AnchorMax: {x: 0.49995, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6474,6 +6754,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1987502728}
   m_CullTransparentMesh: 1
+--- !u!1 &1990606999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1990607000}
+  - component: {fileID: 1990607001}
+  m_Layer: 26
+  m_Name: FortressL inner Limit Angled  (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1990607000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990606999}
+  m_LocalRotation: {x: 0, y: 0.02443219, z: 0, w: 0.9997015}
+  m_LocalPosition: {x: -7.4491987, y: 1, z: -15.66}
+  m_LocalScale: {x: 12.041148, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 16162234}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 2.8, z: 0}
+--- !u!65 &1990607001
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990606999}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 5.543698, z: 1}
+  m_Center: {x: 0, y: 2.2718484, z: 0}
 --- !u!1 &2022799909
 GameObject:
   m_ObjectHideFlags: 0

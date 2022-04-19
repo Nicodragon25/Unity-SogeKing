@@ -192,9 +192,9 @@ GameObject:
   - component: {fileID: 7907762246803106617}
   - component: {fileID: 7907762246803106616}
   - component: {fileID: 7907762246803106619}
-  - component: {fileID: 7907762246803106618}
   - component: {fileID: 7907762246803106621}
   - component: {fileID: 7907762246803106620}
+  - component: {fileID: 4061219567932551100}
   m_Layer: 30
   m_Name: Player
   m_TagString: Player
@@ -266,20 +266,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7907762246803106618
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7907762246803106623}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7907762246803106621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,7 +278,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c97962e7d8368d48961acbe3453b052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
   arrowGenerator: {fileID: 7907762246836341038}
   arrow: {fileID: 0}
   playerViewPoint: {fileID: 7907762245599840139}
@@ -323,6 +308,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!65 &4061219567932551100
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7907762246803106623}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7907762246836341038
 GameObject:
   m_ObjectHideFlags: 0

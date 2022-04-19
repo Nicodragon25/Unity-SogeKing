@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 using System;
 using TMPro;
 public class GameManager : MonoBehaviour
@@ -12,8 +13,7 @@ public class GameManager : MonoBehaviour
     public ScoreController scoreController;
     public GameObject door;
     public GameObject player;
-
-
+    public AudioMixer audioMixer;
 
     public int highScore;
     int doorHp;
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
         Instance.powerBar.minValue = player.GetComponent<PlayerController>().minArrowSpeed - 10;
         Instance.powerBar.maxValue = player.GetComponent<PlayerController>().maxArrowSpeed;
 
-        if(door.GetComponent<DoorController>()) doorHp = door.GetComponent<DoorController>().doorHP;
+        if (door.GetComponent<DoorController>()) doorHp = door.GetComponent<DoorController>().doorHP;
         Instance.doorHpBar.maxValue = doorHp;
         Instance.doorHpBar.value = doorHp;
     }
@@ -58,7 +58,30 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         powerBar.gameObject.SetActive(false);
-
+        if (PlayerPrefs.GetFloat("MasterVolume") != 0)
+        {
+            audioMixer.SetFloat("AudioMixerMasterVolume", Mathf.Log10(PlayerPrefs.GetFloat("MasterVolume")) * 20);
+        }
+        else if (PlayerPrefs.GetFloat("MasterVolume") == 0)
+        {
+            audioMixer.SetFloat("AudioMixerMasterVolume", Mathf.Log10(0.5f) * 20);
+        }
+        if (PlayerPrefs.GetFloat("MusicVolume") != 0)
+        {
+            audioMixer.SetFloat("AudioMixerMusicVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
+        }
+        else if (PlayerPrefs.GetFloat("MusicVolume") == 0)
+        {
+            audioMixer.SetFloat("AudioMixerMusicVolume", Mathf.Log10(0.5f) * 20);
+        }
+        if (PlayerPrefs.GetFloat("SFXVolume") != 0)
+        {
+            audioMixer.SetFloat("AudioMixerSFXVolume", Mathf.Log10(PlayerPrefs.GetFloat("SFXVolume")) * 20);
+        }
+        else if (PlayerPrefs.GetFloat("SFXVolume") == 0)
+        {
+            audioMixer.SetFloat("AudioMixerSFXVolume", Mathf.Log10(0.5f) * 20);
+        }
     }
 
     // Update is called once per frame
@@ -130,7 +153,7 @@ public class GameManager : MonoBehaviour
 
     void GameOver()
     {
-        if(scoreController.actualScore > highScore)
+        if (scoreController.actualScore > highScore)
         {
             highScore = scoreController.actualScore;
             PlayerPrefs.SetInt("HighScore", highScore);

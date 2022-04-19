@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6
   enemyDamage: 20
-  enemyHp: 40
+  enemyHp: 30
   moveCooldown: 0.2
   attackCooldown: 2
   rayDistance: 0.5

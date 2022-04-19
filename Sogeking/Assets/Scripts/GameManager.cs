@@ -140,6 +140,7 @@ public class GameManager : MonoBehaviour
 
     void GameOver()
     {
+        scoreController.actualScore = 0;
         uiController.gameOverPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "High Score : " + PlayerPrefs.GetInt("HighScore").ToString();
         uiController.GameOverPanel();
         Cursor.lockState = CursorLockMode.Confined;

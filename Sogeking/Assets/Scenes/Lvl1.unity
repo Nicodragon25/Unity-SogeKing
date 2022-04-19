@@ -946,7 +946,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82675a963a61e7942b16023bfa9a49ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: f13793de78b636a469e13988630d0d4c, type: 2}
 --- !u!1 &268892153
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,7 +979,7 @@ MonoBehaviour:
   - {fileID: 647939126954112446, guid: a6c26a61a6f203842bd02d43c60fd096, type: 3}
   - {fileID: 647939126954112446, guid: 990a4886c82b11649b0db60f38bff26d, type: 3}
   - {fileID: 647939126954112446, guid: 58cd678f2a670274aa80fc21a48ad18a, type: 3}
-  SpawnCD: 3
+  SpawnCD: 2.25
   normalEnemy: 0
   generatedNumber: 0
   maxNormalEnemies: 7
@@ -2199,7 +2198,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82675a963a61e7942b16023bfa9a49ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: f13793de78b636a469e13988630d0d4c, type: 2}
 --- !u!1 &607732987
 GameObject:
   m_ObjectHideFlags: 0
@@ -3234,7 +3232,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82675a963a61e7942b16023bfa9a49ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: f13793de78b636a469e13988630d0d4c, type: 2}
 --- !u!1 &941253349
 GameObject:
   m_ObjectHideFlags: 0
@@ -5376,7 +5373,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1572633413
 RectTransform:
   m_ObjectHideFlags: 0

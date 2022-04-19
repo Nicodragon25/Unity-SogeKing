@@ -22,4 +22,21 @@ public class ButtonScript : MonoBehaviour
     {
         GameManager.Instance.LoadLevel(0);
     }
+
+    public void PlayButton()
+    {
+        GameManager.Instance.NextLevel();
+    }
+    public void OptionsButton()
+    {
+        GameManager.Instance.GetComponent<UiController>().OptionsButton();
+    }
+    public void CreditsButton()
+    {
+        GameManager.Instance.GetComponent<UiController>().CreditsButton();
+    }
+    public void QuitButton()
+    {
+        Application.Quit();
+    }
 }

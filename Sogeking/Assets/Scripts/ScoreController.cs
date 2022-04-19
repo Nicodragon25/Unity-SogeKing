@@ -9,6 +9,10 @@ public class ScoreController : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public int actualScore = 0;
 
+    private void Awake()
+    {
+        actualScore = 0;
+    }
     public void AddScore(int points)
     {
         if (GameObject.Find("ScoreTxt") != null)

@@ -5310,6 +5310,7 @@ GameObject:
   - component: {fileID: 126315507}
   - component: {fileID: 126315510}
   - component: {fileID: 126315508}
+  - component: {fileID: 126315509}
   m_Layer: 5
   m_Name: CreditsButton
   m_TagString: Untagged
@@ -5381,8 +5382,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1947476004}
-        m_TargetAssemblyTypeName: UiController, Assembly-CSharp
+      - m_Target: {fileID: 126315509}
+        m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
         m_MethodName: CreditsButton
         m_Mode: 1
         m_Arguments:
@@ -5393,6 +5394,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &126315509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126315506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45568bdcbaa25045ae9dec3203b7f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &126315510
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11635,6 +11648,7 @@ GameObject:
   - component: {fileID: 598348839}
   - component: {fileID: 598348842}
   - component: {fileID: 598348840}
+  - component: {fileID: 598348841}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -11706,8 +11720,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1947476004}
-        m_TargetAssemblyTypeName: UiController, Assembly-CSharp
+      - m_Target: {fileID: 598348841}
+        m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
         m_MethodName: PlayButton
         m_Mode: 1
         m_Arguments:
@@ -11718,6 +11732,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &598348841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598348838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45568bdcbaa25045ae9dec3203b7f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &598348842
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13982,6 +14008,7 @@ GameObject:
   - component: {fileID: 674876006}
   - component: {fileID: 674876009}
   - component: {fileID: 674876007}
+  - component: {fileID: 674876008}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -14053,8 +14080,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1947476004}
-        m_TargetAssemblyTypeName: UiController, Assembly-CSharp
+      - m_Target: {fileID: 674876008}
+        m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
         m_MethodName: QuitButton
         m_Mode: 1
         m_Arguments:
@@ -14065,6 +14092,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &674876008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674876005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45568bdcbaa25045ae9dec3203b7f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &674876009
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16714,6 +16753,7 @@ GameObject:
   - component: {fileID: 987164983}
   - component: {fileID: 987164986}
   - component: {fileID: 987164984}
+  - component: {fileID: 987164985}
   m_Layer: 5
   m_Name: OptionsButton
   m_TagString: Untagged
@@ -16785,8 +16825,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1947476004}
-        m_TargetAssemblyTypeName: UiController, Assembly-CSharp
+      - m_Target: {fileID: 987164985}
+        m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
         m_MethodName: OptionsButton
         m_Mode: 1
         m_Arguments:
@@ -16797,6 +16837,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &987164985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987164982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45568bdcbaa25045ae9dec3203b7f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &987164986
 CanvasRenderer:
   m_ObjectHideFlags: 0

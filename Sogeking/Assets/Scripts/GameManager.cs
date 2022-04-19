@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public int actualEnemies;
     private void Awake()
     {
+        PlayerPrefs.SetInt("HighScore", 0);
         if (Instance == null)
         {
             Instance = this;
@@ -134,13 +135,13 @@ public class GameManager : MonoBehaviour
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        scoreController.actualScore = 0;
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     void GameOver()
     {
-        scoreController.actualScore = 0;
         uiController.gameOverPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "High Score : " + PlayerPrefs.GetInt("HighScore").ToString();
         uiController.GameOverPanel();
         Cursor.lockState = CursorLockMode.Confined;

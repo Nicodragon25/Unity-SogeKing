@@ -527,6 +527,7 @@ GameObject:
   - component: {fileID: 116936412}
   - component: {fileID: 116936414}
   - component: {fileID: 116936413}
+  - component: {fileID: 116936415}
   m_Layer: 5
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -598,9 +599,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 550237916}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: PauseToggle
+      - m_Target: {fileID: 116936415}
+        m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
+        m_MethodName: ResumeButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -618,6 +619,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116936411}
   m_CullTransparentMesh: 1
+--- !u!114 &116936415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116936411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45568bdcbaa25045ae9dec3203b7f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!850595691 &181070529
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -965,9 +978,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies:
   - {fileID: 647939126954112446, guid: a6c26a61a6f203842bd02d43c60fd096, type: 3}
-  - {fileID: 647939126954112446, guid: 58cd678f2a670274aa80fc21a48ad18a, type: 3}
   - {fileID: 647939126954112446, guid: 990a4886c82b11649b0db60f38bff26d, type: 3}
-  SpawnCD: 2.5
+  - {fileID: 647939126954112446, guid: 58cd678f2a670274aa80fc21a48ad18a, type: 3}
+  SpawnCD: 3
+  normalEnemy: 0
+  generatedNumber: 0
   maxNormalEnemies: 7
   maxStrongEnemies: 3
   maxFastEnemies: 3
@@ -4974,6 +4989,7 @@ GameObject:
   - component: {fileID: 1456190528}
   - component: {fileID: 1456190530}
   - component: {fileID: 1456190529}
+  - component: {fileID: 1456190531}
   m_Layer: 5
   m_Name: ApplyButton
   m_TagString: Untagged
@@ -5045,9 +5061,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 550237916}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ApplyChanges
+      - m_Target: {fileID: 1456190531}
+        m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
+        m_MethodName: ApplyButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5065,6 +5081,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1456190527}
   m_CullTransparentMesh: 1
+--- !u!114 &1456190531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456190527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45568bdcbaa25045ae9dec3203b7f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1473953117
 GameObject:
   m_ObjectHideFlags: 0

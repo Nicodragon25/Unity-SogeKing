@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class VolumeSliders : MonoBehaviour
 {
-    public static VolumeSliders volumen;
     public AudioMixer audioMixer;
     private void Awake()
     {

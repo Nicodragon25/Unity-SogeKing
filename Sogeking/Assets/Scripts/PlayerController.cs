@@ -40,6 +40,15 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameManager.Instance.PauseToggle();
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            GameManager.Instance.PauseToggle();
+        }
+
         if (Input.GetMouseButtonDown(1))
         {
             arrowGenerator.GetComponent<ArrowGenerator>().arrowSpawn(playerViewPoint.transform.rotation.eulerAngles);

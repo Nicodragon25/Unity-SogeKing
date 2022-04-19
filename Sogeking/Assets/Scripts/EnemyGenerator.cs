@@ -17,6 +17,9 @@ public class EnemyGenerator : MonoBehaviour
     float TimePass;
     public float SpawnCD;
 
+    int rareEnemy = 0;
+    public int normalEnemy = 0;
+    public int generatedNumber;
     int spawnedEnemies;
     public int maxNormalEnemies;
     public int maxStrongEnemies;
@@ -37,7 +40,7 @@ public class EnemyGenerator : MonoBehaviour
         {
             if (enemies.Count > 0)
             {
-                if (GameObject.FindGameObjectWithTag("Door")??false)
+                if (GameObject.FindGameObjectWithTag("Door") ?? false)
                 {
                     SpawnEnemy();
                     TimePass = 0;
@@ -47,75 +50,52 @@ public class EnemyGenerator : MonoBehaviour
         else TimePass += Time.deltaTime;
     }
 
+
     void SpawnEnemy()
     {
         float RandomPositionX = Random.Range(minXDistance, maxXDistance);
         float RandomPositionZ = Random.Range(minZDistance, maxZDistance);
         int randomEnemy = Random.Range(0, enemies.Count);
         Vector3 spawnPosition = new Vector3(RandomPositionX, 0.5f, RandomPositionZ);
-
-        if(spawnedEnemies < 2 && TimePass > SpawnCD)
+       
+        generatedNumber = Random.Range(0, 100);
+        if (generatedNumber >= 0 && generatedNumber < 50 && normalEnemy <= 4)
         {
             enemy = Instantiate(enemies[0], spawnPosition, Quaternion.identity);
-            spawnedEnemies++;
+            rareEnemy = 0;
+            normalEnemy++;
             TimePass = 0;
         }
-        if (spawnedEnemies >= 2 && TimePass > SpawnCD)
+        if (generatedNumber >= 50 && generatedNumber < 75 && rareEnemy == 0)
         {
-            enemy = Instantiate(enemies[randomEnemy], spawnPosition, Quaternion.identity);
-            spawnedEnemies++;
+            enemy = Instantiate(enemies[1], spawnPosition, Quaternion.identity);
+            rareEnemy = 1;
+            normalEnemy = 0;
             TimePass = 0;
         }
-        switch (enemy.name)
+        if (generatedNumber >= 75 && generatedNumber < 100 && rareEnemy == 0)
         {
-            case "Enemy(Clone)":
-                maxNormalEnemies--;
-                break;
-            case "Heavy Enemy(Clone)":
-                maxStrongEnemies--;
-                break;
-            case "Light Enemy(Clone)":
-                maxFastEnemies--;
-                break;
+            enemy = Instantiate(enemies[2], spawnPosition, Quaternion.identity);
+            rareEnemy = 1;
+            normalEnemy = 0;
+            TimePass = 0;
         }
-
-        if (maxStrongEnemies <= 0 && !strongEnemyEliminated)
+        if (generatedNumber >= 0 && generatedNumber < 50 && normalEnemy > 4)
         {
-            for (int i = 0; i < enemies.Count; i++)
+            generatedNumber = Random.Range(50, 100);
+            if (generatedNumber >= 50 && generatedNumber < 75 && rareEnemy == 0)
             {
-                GameObject slowEnemy = enemies[i];
-                if (slowEnemy.name == "Heavy Enemy")
-                {
-                    enemies.Remove(slowEnemy);
-                    strongEnemyEliminated = true;
-                }
+                enemy = Instantiate(enemies[1], spawnPosition, Quaternion.identity);
+                rareEnemy = 1;
+                TimePass = 0;
             }
-        }
-
-        if (maxNormalEnemies <= 0 && !normalEnemyEliminated)
-        {
-            for (int i = 0; i < enemies.Count; i++)
+            if (generatedNumber >= 75 && generatedNumber < 100 && rareEnemy == 0)
             {
-                GameObject normalEnemy = enemies[i];
-                if (normalEnemy.name == "Enemy")
-                {
-                    enemies.Remove(normalEnemy);
-                    normalEnemyEliminated = true;
-                }
+                enemy = Instantiate(enemies[2], spawnPosition, Quaternion.identity);
+                rareEnemy = 1;
+                TimePass = 0;
             }
+            normalEnemy = 0;
         }
-        if (maxFastEnemies <= 0 && !fastEnemyEliminated)
-        {
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                GameObject fastEnemy = enemies[i];
-                if (fastEnemy.name == "Light Enemy")
-                {
-                    enemies.Remove(fastEnemy);
-                    fastEnemyEliminated = true;
-                }
-            }
-        }
-
     }
 }

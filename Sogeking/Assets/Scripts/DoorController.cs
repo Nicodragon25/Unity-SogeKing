@@ -15,6 +15,7 @@ public class DoorController : MonoBehaviour
     public void TakeDamage(int doorDmgTaken)
     {
         doorHP -= doorDmgTaken;
+        GameManager.Instance.doorHpBar.value = doorHP;
         if (doorHP <= 0)
         {
             gameObject.SetActive(false);

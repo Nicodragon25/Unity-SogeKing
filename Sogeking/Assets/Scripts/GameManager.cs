@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     int doorHp;
     public Slider doorHpBar;
     public Slider powerBar;
-    public Slider mouseSensitivitySlider;
+    //public Slider mouseSensitivitySlider;
     public GameObject HitmarkerGO;
 
     public int actualEnemies;
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         {
             Instance.doorHpBar = doorHpBar;
             Instance.powerBar = powerBar;
-            Instance.mouseSensitivitySlider = mouseSensitivitySlider;
+            //Instance.mouseSensitivitySlider = mouseSensitivitySlider;
             //Instance.player = player;
             Instance.door = door;
             Instance.HitmarkerGO = HitmarkerGO;
@@ -50,9 +50,9 @@ public class GameManager : MonoBehaviour
         Instance.powerBar.minValue = player.GetComponent<PlayerController>().minArrowSpeed - 10;
         Instance.powerBar.maxValue = player.GetComponent<PlayerController>().maxArrowSpeed;
 
-        if (door.GetComponent<DoorController>()) doorHp = door.GetComponent<DoorController>().doorHP;
-        Instance.doorHpBar.maxValue = doorHp;
-        Instance.doorHpBar.value = doorHp;
+        //if (door.GetComponent<DoorController>()) doorHp = door.GetComponent<DoorController>().doorHP;
+        Instance.doorHpBar.maxValue = door.GetComponent<DoorController>().doorHP;
+        Instance.doorHpBar.value = door.GetComponent<DoorController>().doorHP;
     }
     void Start()
     {
@@ -84,18 +84,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (doorHp != 0)
-        {
-            doorHpBar.value = door.GetComponent<DoorController>().doorHP;
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            PauseToggle();
-        }
-    }
     public void PauseToggle()
     {
         if (Time.timeScale == 0)

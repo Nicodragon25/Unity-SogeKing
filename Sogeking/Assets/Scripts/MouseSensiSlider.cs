@@ -9,12 +9,12 @@ public class MouseSensiSlider : MonoBehaviour
     private void Awake()
     {
         FindObjectOfType<GameManager>().OnApplyButton += apply;
-        if (PlayerPrefs.GetFloat("MouseSensitivity") > 0)
+        if (PlayerPrefs.GetFloat("MouseSensitivity") > 0 && FindObjectOfType<MouseLook>())
         {
             gameObject.GetComponent<Slider>().value = PlayerPrefs.GetFloat("MouseSensitivity");
             FindObjectOfType<MouseLook>().mouseSensitivity = PlayerPrefs.GetFloat("MouseSensitivity");
         }
-        if (PlayerPrefs.GetFloat("MouseSensitivity") <= 0)
+        if (PlayerPrefs.GetFloat("MouseSensitivity") <= 0 && FindObjectOfType<MouseLook>())
         {
             gameObject.GetComponent<Slider>().value = 150;
             FindObjectOfType<MouseLook>().mouseSensitivity = 150;
@@ -23,6 +23,7 @@ public class MouseSensiSlider : MonoBehaviour
 
     void apply()
     {
-      PlayerPrefs.SetFloat("MouseSensitivity" , gameObject.GetComponent<Slider>().value);
+        PlayerPrefs.SetFloat("MouseSensitivity", gameObject.GetComponent<Slider>().value);
+        if(FindObjectOfType<MouseLook>() != null) FindObjectOfType<MouseLook>().mouseSensitivity = PlayerPrefs.GetFloat("MouseSensitivity");
     }
 }
